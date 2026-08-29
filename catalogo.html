@@ -1,103 +1,264 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luna</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-</head>
-<body>
-    <div class="panel">
-    <h2>Tienda Virtual 3D</h2>
-    
-    <p>
-    Con el mouse puedes girar la camara y con wasd o las flechas puedes moverte.
-    </p>
-    
-    <p>
-    Mira el círculo del centro de la pantalla y apunta a los productos.
-    </p>
-    
-    <p>
-    Productos seleccionados:
-    <span id="contador">0</span>
-    </p>
-    
-    </div>
-    <a-scene>
 
-        <!-- CAMARA CON CURSOR -->
-        <a-entity position="0 1.6 10">
-    
-            <a-camera>
-    
-                <!-- CURSOR -->
-                <a-cursor
-                    color="black"
-                    fuse="true"
-                    fuse-timeout="700">
-                </a-cursor>
-    
-            </a-camera>
-    
-        </a-entity>
-    
-        <!-- PISO -->
-        <a-plane
-            rotation="-90 0 0"
-            width="40"
-            height="40"
-            color="#d7d7d7">
-        </a-plane>
-    
-        <!-- PAREDES -->
-        <a-box position="0 4 -15" width="30" height="8" depth="0.5" color="#ffffff"></a-box>
-    
-        <!-- MOSTRADOR -->
-        <a-box position="0 1 -2" width="6" height="2" depth="2" color="#6d4c41"></a-box>
-    
-        <!-- ESTANTERIAS -->
-        <a-box position="-8 2 -8" width="6" height="4" depth="1" color="#8B4513"></a-box>
-        <a-box position="8 2 -8" width="6" height="4" depth="1" color="#8B4513"></a-box>
-    
+    <title>Catálogo - EcoFood</title>
+
+    <link rel="stylesheet" href="estilos.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+</head>
+
+<body>
+
+    <div class="catalogo">
+
+        <!-- ENCABEZADO -->
+
+        <header class="catalogo-header">
+
+            <div class="logo">
+                <i class="bi bi-leaf-fill"></i>
+
+                <div>
+                    <h1>EcoFood</h1>
+                    <p>Menos desperdicio, más ahorro.</p>
+                </div>
+            </div>
+
+            <a href="index.html" class="volver">
+                <i class="bi bi-arrow-left"></i>
+                Volver al inicio
+            </a>
+
+        </header>
+
+
+        <!-- TÍTULO -->
+
+        <section class="catalogo-titulo">
+
+            <h2>Catálogo de alimentos 🥬</h2>
+
+            <p>
+                Consulta los alimentos registrados y organiza mejor tu despensa.
+            </p>
+
+        </section>
+
+
+        <!-- BUSCADOR -->
+
+        <div class="catalogo-buscador">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                id="buscarCatalogo"
+                placeholder="Buscar un alimento..."
+            >
+
+        </div>
+
+
+        <!-- CATEGORÍAS -->
+
+        <div class="categorias">
+
+            <button onclick="filtrar('todos')">
+                Todos
+            </button>
+
+            <button onclick="filtrar('frutas')">
+                🍎 Frutas
+            </button>
+
+            <button onclick="filtrar('verduras')">
+                🥬 Verduras
+            </button>
+
+            <button onclick="filtrar('lacteos')">
+                🥛 Lácteos
+            </button>
+
+            <button onclick="filtrar('carnes')">
+                🍗 Carnes
+            </button>
+
+        </div>
+
+
         <!-- PRODUCTOS -->
-        <a-box class="producto" position="-10 4 -8" color="red"></a-box>
-        <a-box class="producto" position="-8 4 -8" color="blue"></a-box>
-        <a-box class="producto" position="-6 4 -8" color="green"></a-box>
-    
-        <a-sphere class="producto" position="-10 2 -8" radius="0.5" color="yellow"></a-sphere>
-        <a-sphere class="producto" position="-8 2 -8" radius="0.5" color="orange"></a-sphere>
-    
-        <a-cylinder class="producto" position="8 2 -8" radius="0.5" height="1" color="purple"></a-cylinder>
-        <a-cylinder class="producto" position="10 2 -8" radius="0.5" height="1" color="#009688"></a-cylinder>
-    
-        <!-- TEXTO -->
-        <a-text
-            value="SUPERMARKET VR"
-            position="-5 6 -10"
-            scale="3 3 3"
-            color="black">
-        </a-text>
-    
-        <!-- LUCES -->
-        <a-light type="ambient" intensity="1"></a-light>
-        <a-light type="point" intensity="1.5" position="0 8 0"></a-light>
-    
-        <!-- OBJETO ANIMADO -->
-        <a-torus
-            position="0 5 -6"
-            radius="1"
-            radius-tubular="0.1"
-            color="#2196F3"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 3000">
-        </a-torus>
-    
-    </a-scene>
-    <script src="app.js"></script>
-    
-    
+
+        <section class="catalogo-grid">
+
+
+            <div class="catalogo-producto" data-categoria="frutas">
+
+                <div class="producto-icono">
+                    🍓
+                </div>
+
+                <h3>Fresas</h3>
+
+                <p>Frutas</p>
+
+                <strong>250 g</strong>
+
+                <span class="estado-rojo">
+                    Próximo a vencer
+                </span>
+
+            </div>
+
+
+            <div class="catalogo-producto" data-categoria="frutas">
+
+                <div class="producto-icono">
+                    🍎
+                </div>
+
+                <h3>Manzanas</h3>
+
+                <p>Frutas</p>
+
+                <strong>1 kg</strong>
+
+                <span class="estado-verde">
+                    En buen estado
+                </span>
+
+            </div>
+
+
+            <div class="catalogo-producto" data-categoria="verduras">
+
+                <div class="producto-icono">
+                    🥬
+                </div>
+
+                <h3>Lechuga</h3>
+
+                <p>Verduras</p>
+
+                <strong>1 unidad</strong>
+
+                <span class="estado-amarillo">
+                    5 días
+                </span>
+
+            </div>
+
+
+            <div class="catalogo-producto" data-categoria="verduras">
+
+                <div class="producto-icono">
+                    🍅
+                </div>
+
+                <h3>Tomate</h3>
+
+                <p>Verduras</p>
+
+                <strong>500 g</strong>
+
+                <span class="estado-verde">
+                    En buen estado
+                </span>
+
+            </div>
+
+
+            <div class="catalogo-producto" data-categoria="lacteos">
+
+                <div class="producto-icono">
+                    🥛
+                </div>
+
+                <h3>Leche</h3>
+
+                <p>Lácteos</p>
+
+                <strong>1 litro</strong>
+
+                <span class="estado-rojo">
+                    2 días
+                </span>
+
+            </div>
+
+
+            <div class="catalogo-producto" data-categoria="lacteos">
+
+                <div class="producto-icono">
+                    🥣
+                </div>
+
+                <h3>Yogur natural</h3>
+
+                <p>Lácteos</p>
+
+                <strong>500 ml</strong>
+
+                <span class="estado-amarillo">
+                    6 días
+                </span>
+
+            </div>
+
+
+            <div class="catalogo-producto" data-categoria="carnes">
+
+                <div class="producto-icono">
+                    🍗
+                </div>
+
+                <h3>Pechuga de pollo</h3>
+
+                <p>Carnes</p>
+
+                <strong>500 g</strong>
+
+                <span class="estado-rojo">
+                    4 días
+                </span>
+
+            </div>
+
+
+            <div class="catalogo-producto" data-categoria="frutas">
+
+                <div class="producto-icono">
+                    🍌
+                </div>
+
+                <h3>Banano</h3>
+
+                <p>Frutas</p>
+
+                <strong>6 unidades</strong>
+
+                <span class="estado-amarillo">
+                    5 días
+                </span>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+
+    <script src="catalogo.js"></script>
+
 </body>
+
 </html>

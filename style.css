@@ -1,153 +1,827 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    background:#f4f4f4;
-    color:#333333;
+body {
+    margin: 0;
+    background: #f7f8f3;
+    color: #293124;
+    font-family: Arial, sans-serif;
 }
 
-/* Encabezado */
-header{
-    background:#0f9e3a;
-    color:white;
-    padding:20px;
-    text-align:center;
+
+/* CONTENEDOR */
+
+.contenedor {
+    display: flex;
+    min-height: 100vh;
 }
 
-header h1{
-    margin-bottom:10px;
+
+/* MENÚ */
+
+.menu {
+    width: 245px;
+    background: white;
+    border-right: 1px solid #e1e5d8;
+    padding: 25px 17px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
 }
 
-/* Menú */
-nav{
-    background:#5cf771;
-    padding:15px;
-    text-align:center;
+
+.logo {
+    padding: 5px 10px 30px;
 }
 
-nav a{
-    color:rgb(245, 248, 246);
-    text-decoration:none;
-    margin:0 15px;
-    font-weight:bold;
+.logo i {
+    color: #709c20;
+    font-size: 28px;
 }
 
-nav a:hover{
-    color:#64ffda;
+.logo h2 {
+    display: inline;
+    color: #709c20;
+    font-size: 28px;
+    margin-left: 5px;
 }
 
-/* Hero */
-.hero{
-    text-align:center;
-    padding:60px 20px;
-    background:rgb(242, 243, 242);
+.logo p {
+    font-size: 10px;
+    color: #777;
+    margin: 3px 0;
 }
 
-.hero h2{
-    margin-bottom:15px;
-    color:#2aa531;
+
+/* BOTONES DEL MENÚ */
+
+.menu-btn {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 11px;
+    margin-bottom: 4px;
+    text-align: left;
+    border-radius: 8px;
+    color: #4c5347;
+    cursor: pointer;
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
-.hero p{
-    max-width:700px;
-    margin:auto;
+.menu-btn:hover {
+    background: #edf2df;
 }
 
-/* Contenedor VR */
-.vr-container{
-    width:90%;
-    max-width:1200px;
-    margin:40px auto;
-    background:rgb(250, 252, 250);
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 0 10px rgba(17, 248, 36, 0.1);
+.menu-btn.activo {
+    background: #709c20;
+    color: white;
 }
 
-.vr-container h2{
-    text-align:center;
-    padding:20px;
-    background:#24be31;
-    color:white;
+.menu-btn i {
+    font-size: 16px;
 }
 
-/* Escena VR */
-a-scene{
-    height:600px;
+.numero {
+    margin-left: auto;
+    background: #c94c39;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 10px;
 }
 
-/* Servicios */
-.servicios{
-    padding:50px 20px;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
+
+/* MENSAJE */
+
+.mensaje-eco {
+    background: #f0f2e8;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 17px;
+    right: 17px;
 }
 
-.card{
-    width:300px;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(34, 190, 47, 0.1);
+.planeta {
+    font-size: 50px;
 }
 
-.card h3{
-    margin-bottom:10px;
-    color:#065cdd;
+.mensaje-eco h5 {
+    font-size: 13px;
 }
 
-/* Footer */
-footer{
-    background:#0a192f;
-    color:white;
-    text-align:center;
-    padding:20px;
-    margin-top:40px;
+.mensaje-eco p {
+    color: #777;
+    font-size: 10px;
 }
 
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
+
+/* CONTENIDO */
+
+.contenido {
+    margin-left: 245px;
+    width: calc(100% - 245px);
+    padding: 0 35px 40px;
 }
 
-.tabs{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    width:fit-content;
-    margin:20px auto;
-    padding:10px 20px;
-    background:#0a192f;
-    border-radius:12px;
+
+/* BARRA */
+
+.barra {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.tabs button{
-    padding:10px 40px;
-    border:none;
-    background:none;
-    color:white;
-    cursor:pointer;
-    font-size:18px;
-    border-radius:8px;
-    transition:0.3s;
+.buscador {
+    background: white;
+    border: 1px solid #e1e5d8;
+    border-radius: 30px;
+    width: 380px;
+    padding: 10px 16px;
 }
 
-.tabs button:hover{
-    background:#112240;
+.buscador i {
+    color: #777;
 }
 
-#visor{
-    width:60%;
-    height:90vh;
-    border:none;
-    border-radius:10px;
-    box-shadow:0 0 15px rgba(0,0,0,0.2);
-    display:block;
-    margin:auto;
+.buscador input {
+    border: none;
+    outline: none;
+    width: 90%;
+    margin-left: 5px;
+}
+
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.usuario > i:first-child {
+    font-size: 20px;
+}
+
+.foto-usuario {
+    background: #e6eadd;
+    color: #658c1b;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}
+
+
+/* SECCIONES */
+
+.seccion {
+    display: none;
+}
+
+.seccion.activa {
+    display: block;
+}
+
+
+/* TÍTULO */
+
+.titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0 22px;
+}
+
+.titulo h1 {
+    font-size: 25px;
+    margin: 0;
+}
+
+.titulo p {
+    color: #777;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+
+/* BOTÓN VERDE */
+
+.btn-verde {
+    border: none;
+    background: #709c20;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-verde:hover {
+    background: #587d16;
+}
+
+
+/* ESTADÍSTICAS */
+
+.estadisticas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+    margin-bottom: 18px;
+}
+
+.tarjeta {
+    background: white;
+    border: 1px solid #e1e5d8;
+    border-radius: 10px;
+    padding: 17px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tarjeta p {
+    font-size: 11px;
+    margin: 0;
+}
+
+.tarjeta h2 {
+    font-size: 25px;
+    margin: 3px 0;
+}
+
+.tarjeta small {
+    color: #777;
+    font-size: 9px;
+}
+
+.icono {
+    background: #eff1e8;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+}
+
+.verde-fondo {
+    background: #e7efdb;
+}
+
+.rojo-fondo {
+    background: #f8e7e3;
+}
+
+.rojo {
+    color: #bd493a !important;
+}
+
+.naranja {
+    color: #b87022 !important;
+}
+
+.amarillo {
+    color: #9b801a !important;
+}
+
+
+/* COLUMNAS */
+
+.columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+
+/* PANEL */
+
+.panel {
+    background: white;
+    border: 1px solid #e1e5d8;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.panel-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.panel-titulo h3 {
+    font-size: 15px;
+    margin: 0;
+}
+
+.panel-titulo button {
+    border: none;
+    background: transparent;
+    color: #658c1b;
+    font-size: 11px;
+}
+
+
+/* ALIMENTOS */
+
+.alimento {
+    display: grid;
+    grid-template-columns: 35px 1fr 100px 50px;
+    gap: 8px;
+    align-items: center;
+    border-bottom: 1px solid #f0f1ec;
+    padding: 10px 0;
+    font-size: 11px;
+}
+
+.alimento > span:first-child {
+    font-size: 21px;
+}
+
+.alimento strong {
+    display: block;
+}
+
+.alimento small {
+    color: #777;
+    font-size: 9px;
+}
+
+.dias {
+    padding: 4px 6px;
+    border-radius: 5px;
+    background: #f8e8e4;
+    font-size: 9px;
+    text-align: center;
+}
+
+
+/* BOTÓN COMPLETO */
+
+.btn-completo {
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px;
+    background: white;
+    border: 1px solid #aab0a2;
+    border-radius: 6px;
+    font-size: 10px;
+}
+
+
+/* GRÁFICO */
+
+.grafico {
+    height: 180px;
+    position: relative;
+    background:
+        linear-gradient(#e9ece2 1px, transparent 1px);
+    background-size: 100% 35px;
+    margin-top: 15px;
+}
+
+.grafico-linea {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 35px;
+    height: 80px;
+    border-top: 4px solid #83936f;
+    transform: skewY(-7deg);
+}
+
+.dias-semana {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #777;
+}
+
+
+/* IMPACTO */
+
+.impacto {
+    background: #f0f2e8;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.impacto span {
+    font-size: 30px;
+}
+
+.impacto strong {
+    font-size: 10px;
+}
+
+.impacto h2 {
+    margin: 3px 0;
+}
+
+.impacto small {
+    font-size: 9px;
+    color: #777;
+}
+
+
+/* CAMINO */
+
+.camino {
+    background: #f5f6f0;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.camino div {
+    flex: 1;
+}
+
+.camino strong {
+    font-size: 11px;
+}
+
+.camino p {
+    font-size: 9px;
+    color: #777;
+    margin: 3px 0;
+}
+
+
+/* RECETAS */
+
+.recetas {
+    margin-top: 16px;
+}
+
+.recetas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+}
+
+.foto-receta {
+    height: 80px;
+    background: #eef0e7;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 45px;
+    margin-bottom: 8px;
+}
+
+.receta strong {
+    display: block;
+    font-size: 11px;
+}
+
+.receta small {
+    color: #777;
+    font-size: 9px;
+}
+
+
+/* PRODUCTOS */
+
+.lista-alimentos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.producto {
+    background: white;
+    border: 1px solid #e1e5d8;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom: 15px;
+}
+
+.producto-imagen {
+    height: 150px;
+    background: #eef0e7;
+    display: grid;
+    place-items: center;
+    font-size: 65px;
+}
+
+.producto h3 {
+    font-size: 16px;
+    margin: 13px 15px 3px;
+}
+
+.producto p {
+    color: #777;
+    font-size: 11px;
+    margin: 0 15px 10px;
+}
+
+.producto .dias {
+    margin-left: 15px;
+}
+
+.producto button {
+    float: right;
+    margin-right: 15px;
+    border: none;
+    background: #edf2df;
+    color: #638719;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+
+/* ALERTA */
+
+.alerta {
+    background: #edf3e2;
+    border: 1px solid #dce7c9;
+    border-radius: 8px;
+    padding: 13px;
+    margin-bottom: 18px;
+    font-size: 12px;
+}
+
+
+/* RECETAS GRANDES */
+
+.recetas-completas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.receta-grande {
+    background: white;
+    border: 1px solid #e1e5d8;
+    border-radius: 12px;
+    overflow: hidden;
+    padding-bottom: 18px;
+}
+
+.receta-grande > div {
+    height: 170px;
+    background: #eef0e7;
+    display: grid;
+    place-items: center;
+    font-size: 80px;
+}
+
+.receta-grande h3,
+.receta-grande p,
+.receta-grande span {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.receta-grande h3 {
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.receta-grande p {
+    color: #777;
+    font-size: 11px;
+}
+
+.receta-grande span {
+    background: #edf2df;
+    color: #658c1b;
+    border-radius: 20px;
+    padding: 5px 9px;
+    font-size: 9px;
+}
+
+
+/* RECORDATORIOS */
+
+.recordatorio {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 5px;
+    border-bottom: 1px solid #eee;
+    font-size: 27px;
+}
+
+.recordatorio div {
+    flex: 1;
+}
+
+.recordatorio strong {
+    display: block;
+    font-size: 13px;
+}
+
+.recordatorio small {
+    font-size: 10px;
+    color: #777;
+}
+
+.recordatorio button {
+    border: 1px solid #709c20;
+    color: #709c20;
+    background: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+
+/* BARRAS */
+
+.barras {
+    height: 270px;
+    display: flex;
+    align-items: flex-end;
+    gap: 7%;
+    padding: 25px 5% 0;
+}
+
+.barras div {
+    flex: 1;
+    background: #709c20;
+    border-radius: 7px 7px 0 0;
+}
+
+
+/* CONSEJOS */
+
+.consejos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 17px;
+}
+
+.consejos div {
+    background: white;
+    border: 1px solid #e1e5d8;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.consejos span {
+    font-size: 35px;
+}
+
+.consejos h3 {
+    font-size: 16px;
+}
+
+.consejos p {
+    font-size: 12px;
+    color: #777;
+}
+
+
+/* FORMULARIO */
+
+.formulario {
+    max-width: 650px;
+}
+
+.formulario label {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formulario input,
+.formulario select {
+    margin-bottom: 15px;
+}
+
+
+/* AYUDA */
+
+details {
+    padding: 15px 0;
+    border-bottom: 1px solid #e1e5d8;
+}
+
+summary {
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+details p {
+    color: #777;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+
+/* DETALLE */
+
+.detalle {
+    text-align: center;
+    padding: 30px;
+}
+
+#detalleEmoji {
+    font-size: 90px;
+    background: #eef0e7;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+
+    .estadisticas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .columnas {
+        grid-template-columns: 1fr;
+    }
+
+    .lista-alimentos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .menu {
+        display: none;
+    }
+
+    .contenido {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .barra {
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .buscador {
+        width: 100%;
+    }
+
+    .usuario {
+        display: none;
+    }
+
+    .estadisticas {
+        grid-template-columns: 1fr;
+    }
+
+    .recetas-grid,
+    .lista-alimentos,
+    .recetas-completas,
+    .consejos {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .btn-verde {
+        width: 100%;
+    }
+
+    .alimento {
+        grid-template-columns: 30px 1fr 45px;
+    }
+
+    .alimento > small {
+        display: none;
+    }
 }

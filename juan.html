@@ -1,100 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-<script src="app.js"></script>
+
+    <title>Juan - EcoFood</title>
+
+    <link rel="stylesheet" href="estilos.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
 </head>
+
 <body>
-    
-<div class="panel">
-<h2>Tienda Virtual 3D</h2>
 
-<p>
-Con el mouse puedes girar la camara y con wasd o las flechas puedes moverte.
-</p>
+    <div class="perfil">
 
-<p>
-Mira el círculo del centro de la pantalla y apunta a los productos.
-</p>
+        <!-- ENCABEZADO -->
 
-<p>
-Productos seleccionados:
-<span id="contador">0</span>
-</p>
+        <header class="perfil-header">
 
-</div>
-<a-scene>
+            <div class="logo">
+                <i class="bi bi-leaf-fill"></i>
 
-    <!-- CAMARA CON CURSOR -->
-    <a-entity position="0 1.6 10">
+                <div>
+                    <h1>EcoFood</h1>
+                    <p>Menos desperdicio, más ahorro.</p>
+                </div>
+            </div>
 
-        <a-camera>
+            <a href="index.html" class="volver">
+                <i class="bi bi-arrow-left"></i>
+                Volver al inicio
+            </a>
 
-            <!-- CURSOR -->
-            <a-cursor
-                color="black"
-                fuse="true"
-                fuse-timeout="700">
-            </a-cursor>
+        </header>
 
-        </a-camera>
 
-    </a-entity>
+        <!-- PERFIL -->
 
-    <!-- PISO -->
-    <a-plane
-        rotation="-90 0 0"
-        width="40"
-        height="40"
-        color="#d7d7d7">
-    </a-plane>
+        <section class="perfil-contenido">
 
-    <!-- PAREDES -->
-    <a-box position="0 4 -15" width="30" height="8" depth="0.5" color="#ffffff"></a-box>
+            <div class="foto-juan">
+                J
+            </div>
 
-    <!-- MOSTRADOR -->
-    <a-box position="0 1 -2" width="6" height="2" depth="2" color="#6d4c41"></a-box>
+            <h2>Juan</h2>
 
-    <!-- ESTANTERIAS -->
-    <a-box position="-8 2 -8" width="6" height="4" depth="1" color="#8B4513"></a-box>
-    <a-box position="8 2 -8" width="6" height="4" depth="1" color="#8B4513"></a-box>
+            <p class="cargo">
+                Trabajador de EcoFood
+            </p>
 
-    <!-- PRODUCTOS -->
-    <a-box class="producto" position="-10 4 -8" color="red"></a-box>
-    <a-box class="producto" position="-8 4 -8" color="blue"></a-box>
-    <a-box class="producto" position="-6 4 -8" color="green"></a-box>
 
-    <a-sphere class="producto" position="-10 2 -8" radius="0.5" color="yellow"></a-sphere>
-    <a-sphere class="producto" position="-8 2 -8" radius="0.5" color="orange"></a-sphere>
+            <!-- INFORMACIÓN -->
 
-    <a-cylinder class="producto" position="8 2 -8" radius="0.5" height="1" color="purple"></a-cylinder>
-    <a-cylinder class="producto" position="10 2 -8" radius="0.5" height="1" color="#009688"></a-cylinder>
+            <div class="datos-juan">
 
-    <!-- TEXTO -->
-    <a-text
-        value="SUPERMARKET VR"
-        position="-5 6 -10"
-        scale="3 3 3"
-        color="black">
-    </a-text>
+                <div class="dato">
+                    <i class="bi bi-person"></i>
 
-    <!-- LUCES -->
-    <a-light type="ambient" intensity="1"></a-light>
-    <a-light type="point" intensity="1.5" position="0 8 0"></a-light>
+                    <div>
+                        <strong>Nombre</strong>
+                        <p>Juan</p>
+                    </div>
+                </div>
 
-    <!-- OBJETO ANIMADO -->
-    <a-torus
-        position="0 5 -6"
-        radius="1"
-        radius-tubular="0.1"
-        color="#2196F3"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 3000">
-    </a-torus>
 
-</a-scene>
+                <div class="dato">
+                    <i class="bi bi-envelope"></i>
+
+                    <div>
+                        <strong>Correo</strong>
+                        <p>juan@ecofood.com</p>
+                    </div>
+                </div>
+
+
+                <div class="dato">
+                    <i class="bi bi-briefcase"></i>
+
+                    <div>
+                        <strong>Cargo</strong>
+                        <p>Trabajador</p>
+                    </div>
+                </div>
+
+
+                <div class="dato">
+                    <i class="bi bi-calendar"></i>
+
+                    <div>
+                        <strong>Fecha de ingreso</strong>
+                        <p>2026</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- ESTADÍSTICAS -->
+
+            <div class="estadisticas-juan">
+
+                <div>
+                    <strong>24</strong>
+                    <span>Alimentos registrados</span>
+                </div>
+
+                <div>
+                    <strong>18</strong>
+                    <span>Alimentos aprovechados</span>
+                </div>
+
+                <div>
+                    <strong>4,2 kg</strong>
+                    <span>Desperdicio evitado</span>
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPCIÓN -->
+
+            <div class="descripcion-juan">
+
+                <h3>Sobre Juan 🌱</h3>
+
+                <p>
+                    Juan hace parte del equipo de EcoFood y ayuda
+                    a promover el aprovechamiento de los alimentos,
+                    la reducción del desperdicio y el cuidado del
+                    medio ambiente.
+                </p>
+
+            </div>
+
+
+            <button
+                class="btn-verde"
+                onclick="alert('Perfil actualizado correctamente 💚')"
+            >
+                <i class="bi bi-check-circle"></i>
+                Perfil activo
+            </button>
+
+        </section>
+
+    </div>
+
 </body>
+
 </html>
