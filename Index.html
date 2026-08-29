@@ -3,807 +3,669 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFood - Menos desperdicio, más ahorro</title>
 
-    <title>EcoFood</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-        rel="stylesheet"
-    >
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Iconos Bootstrap -->
-    <link 
-        rel="stylesheet" 
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    >
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- CSS propio -->
-    <link rel="stylesheet" href="estilos.css">
+    <!-- CSS Propio -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="contenedor">
+<div class="app-container">
 
-    <!-- MENÚ LATERAL -->
-    <aside class="menu">
-
-        <div class="logo">
-            <i class="bi bi-leaf-fill"></i>
-            <h2>EcoFood</h2>
-            <p>Menos desperdicio, más ahorro.</p>
+    <!-- =========================================================
+         MENÚ LATERAL (DESKTOP / TABLET)
+         ========================================================= -->
+    <aside class="sidebar">
+        
+        <div class="sidebar-logo">
+            <div class="logo-leaf-icon">
+                <i class="bi bi-tree-fill"></i>
+            </div>
+            <div>
+                <h2>EcoFood</h2>
+                <p>Menos desperdicio, más ahorro.</p>
+            </div>
         </div>
 
-        <nav>
-
-            <button class="menu-btn activo" onclick="mostrar('inicio')">
-                <i class="bi bi-house"></i>
-                Inicio
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn active" onclick="mostrar('inicio')">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Inicio</span>
             </button>
 
-            <button class="menu-btn" onclick="mostrar('alimentos')">
-                <i class="bi bi-basket"></i>
-                Mis alimentos
+            <button class="sidebar-btn" onclick="mostrar('alimentos')">
+                <i class="bi bi-basket2-fill"></i>
+                <span>Mis alimentos</span>
             </button>
 
-            <button class="menu-btn" onclick="mostrar('vencer')">
-                <i class="bi bi-clock"></i>
-                Próximos a vencer
-                <span class="numero">5</span>
+            <button class="sidebar-btn" onclick="mostrar('vencer')">
+                <i class="bi bi-clock-history"></i>
+                <span>Próximos a vencer</span>
+                <span class="sidebar-badge" id="badgeVencerSidebar">5</span>
             </button>
 
-            <button class="menu-btn" onclick="mostrar('recetas')">
-                <i class="bi bi-star"></i>
-                Recetas
+            <button class="sidebar-btn" onclick="mostrar('recetas')">
+                <i class="bi bi-journal-richtext"></i>
+                <span>Recetas</span>
             </button>
 
-            <button class="menu-btn" onclick="mostrar('recordatorios')">
-                <i class="bi bi-bell"></i>
-                Recordatorios
+            <button class="sidebar-btn" onclick="mostrar('recordatorios')">
+                <i class="bi bi-bell-fill"></i>
+                <span>Recordatorios</span>
             </button>
 
-            <button class="menu-btn" onclick="mostrar('estadisticas')">
-                <i class="bi bi-bar-chart"></i>
-                Estadísticas
+            <button class="sidebar-btn" onclick="mostrar('estadisticas')">
+                <i class="bi bi-bar-chart-fill"></i>
+                <span>Estadísticas</span>
             </button>
 
-            <button class="menu-btn" onclick="mostrar('consejos')">
-                <i class="bi bi-lightbulb"></i>
-                Consejos
+            <button class="sidebar-btn" onclick="mostrar('consejos')">
+                <i class="bi bi-lightbulb-fill"></i>
+                <span>Consejos</span>
             </button>
 
-            <button class="menu-btn" onclick="mostrar('configuracion')">
-                <i class="bi bi-gear"></i>
-                Configuración
+            <button class="sidebar-btn" onclick="mostrar('perfil')">
+                <i class="bi bi-person-fill-gear"></i>
+                <span>Perfil y Cuenta</span>
             </button>
 
-            <button class="menu-btn" onclick="mostrar('ayuda')">
-                <i class="bi bi-question-circle"></i>
-                Ayuda
+            <button class="sidebar-btn" onclick="mostrar('ayuda')">
+                <i class="bi bi-question-circle-fill"></i>
+                <span>Ayuda</span>
             </button>
-
         </nav>
 
-        <div class="mensaje-eco">
-            <div class="planeta">🌎</div>
+        <!-- TARJETA ECOLÓGICA DEL PLANETA -->
+        <div class="sidebar-eco-card">
+            <div class="planet-emoji">🌎</div>
             <h5>¡Cada alimento cuenta!</h5>
-            <p>
-                Juntos reducimos el desperdicio
-                y cuidamos el planeta.
-            </p>
+            <p>Juntos reducimos el desperdicio y cuidamos el planeta.</p>
         </div>
 
     </aside>
 
 
-    <!-- CONTENIDO -->
-    <main class="contenido">
+    <!-- =========================================================
+         CONTENIDO PRINCIPAL
+         ========================================================= -->
+    <main class="main-content">
 
-        <!-- BARRA SUPERIOR -->
-        <header class="barra">
+        <!-- BARRA SUPERIOR (HEADER) -->
+        <header class="top-navbar">
+            
+            <!-- Logo móvil -->
+            <div class="mobile-brand">
+                <div class="logo-leaf-icon" style="width:36px;height:36px;font-size:18px;">
+                    <i class="bi bi-tree-fill"></i>
+                </div>
+                <h2>EcoFood</h2>
+            </div>
 
-            <div class="buscador">
+            <!-- Buscador general -->
+            <div class="search-box">
                 <i class="bi bi-search"></i>
                 <input 
                     type="text" 
-                    id="buscador"
+                    id="buscadorPrincipal" 
                     placeholder="Buscar alimentos, recetas, consejos..."
+                    onkeyup="buscarEnApp(event)"
                 >
             </div>
 
-            <div class="usuario">
-                <i class="bi bi-bell"></i>
+            <!-- Acciones de usuario & Notificaciones -->
+            <div class="user-nav-actions">
+                <button class="btn-icon-round" onclick="mostrar('recordatorios')" title="Recordatorios">
+                    <i class="bi bi-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
 
-                <div class="foto-usuario">
-                    S
+                <div class="user-profile-pill" onclick="abrirMenuOPerfil()">
+                    <div class="user-avatar-circle" id="headerAvatar">
+                        <span>S</span>
+                    </div>
+                    <span id="headerNombreUsuario">Hola, Sara</span>
+                    <i class="bi bi-chevron-down"></i>
                 </div>
-
-                <span>Hola, Sara</span>
-                <i class="bi bi-chevron-down"></i>
             </div>
 
         </header>
 
 
-        <!-- ================= INICIO ================= -->
-
-        <section id="inicio" class="seccion activa">
-
-            <div class="titulo">
-
-                <div>
-                    <h1>¡Bienvenida, Sara! 🌿</h1>
-                    <p>
-                        Aquí tienes un resumen de tu despensa y tus hábitos.
-                    </p>
+        <!-- =========================================================
+             VISTA 1: INICIO (DASHBOARD)
+             ========================================================= -->
+        <section id="inicio" class="app-view active-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
+                    <h1 id="saludoPrincipal">¡Hola, Sara! 🌿</h1>
+                    <p>¿Qué vamos a ahorrar hoy?</p>
                 </div>
-
-                <button class="btn-verde" onclick="abrirModal()">
-                    <i class="bi bi-plus"></i>
-                    Agregar alimento
+                
+                <button class="btn-eco-primary" onclick="abrirModalAgregar()">
+                    <i class="bi bi-plus-lg"></i>
+                    <span>Agregar alimento</span>
                 </button>
-
             </div>
 
-
-            <!-- TARJETAS -->
-
-            <div class="estadisticas">
-
-                <div class="tarjeta">
-                    <div>
+            <!-- 3 TARJETAS DE RESUMEN (ESTILO DE LA IMAGEN) -->
+            <div class="resumen-cards-grid">
+                
+                <div class="resumen-card card-green" onclick="mostrar('alimentos')" style="cursor:pointer;">
+                    <div class="resumen-card-info">
                         <p>Alimentos registrados</p>
-                        <h2>24</h2>
+                        <h2 id="totalAlimentosResumen">12</h2>
                         <small>Total en tu despensa</small>
                     </div>
-
-                    <i class="bi bi-basket icono"></i>
+                    <div class="resumen-card-icon">
+                        <i class="bi bi-basket2"></i>
+                    </div>
                 </div>
 
-
-                <div class="tarjeta">
-                    <div>
+                <div class="resumen-card card-peach" onclick="mostrar('vencer')" style="cursor:pointer;">
+                    <div class="resumen-card-info">
                         <p>Próximos a vencer</p>
-                        <h2 class="rojo">5</h2>
+                        <h2 id="totalVencerResumen">5</h2>
                         <small>Requieren tu atención</small>
                     </div>
-
-                    <i class="bi bi-clock icono rojo-fondo"></i>
+                    <div class="resumen-card-icon">
+                        <i class="bi bi-calendar-event"></i>
+                    </div>
                 </div>
 
-
-                <div class="tarjeta">
-                    <div>
-                        <p>Alimentos aprovechados</p>
-                        <h2>18</h2>
-                        <small>Esta semana</small>
+                <div class="resumen-card card-gold" onclick="mostrar('estadisticas')" style="cursor:pointer;">
+                    <div class="resumen-card-info">
+                        <p>Dinero ahorrado</p>
+                        <h2>$34.000</h2>
+                        <small>¡Gran impacto!</small>
                     </div>
-
-                    <i class="bi bi-leaf icono verde-fondo"></i>
-                </div>
-
-
-                <div class="tarjeta">
-                    <div>
-                        <p>Días de ahorro</p>
-                        <h2>7</h2>
-                        <small>¡Sigue así!</small>
+                    <div class="resumen-card-icon">
+                        <i class="bi bi-coin"></i>
                     </div>
-
-                    <i class="bi bi-calendar icono"></i>
                 </div>
 
             </div>
 
-
-            <!-- DOS COLUMNAS -->
-
-            <div class="columnas">
-
-                <!-- PRÓXIMOS A VENCER -->
-
-                <div class="panel">
-
-                    <div class="panel-titulo">
+            <!-- COLUMNAS: PRÓXIMOS A VENCER & TU IMPACTO -->
+            <div class="dashboard-columns">
+                
+                <!-- PANEL: PRÓXIMOS A VENCER -->
+                <div class="eco-panel">
+                    <div class="panel-header">
                         <h3>Próximos a vencer</h3>
-
-                        <button onclick="mostrar('vencer')">
-                            Ver todos
-                        </button>
+                        <button class="panel-link-btn" onclick="mostrar('vencer')">Ver todos</button>
                     </div>
 
-
-                    <div class="alimento">
-                        <span>🥛</span>
-
-                        <div>
-                            <strong>Leche</strong>
-                            <small>Lácteos</small>
-                        </div>
-
-                        <small>20 mayo 2026</small>
-
-                        <span class="dias rojo">2 días</span>
+                    <div class="expiring-list" id="listaExpiringInicio">
+                        <!-- Generado dinámicamente con JavaScript -->
                     </div>
 
-
-                    <div class="alimento">
-                        <span>🍓</span>
-
-                        <div>
-                            <strong>Fresas</strong>
-                            <small>Frutas</small>
-                        </div>
-
-                        <small>21 mayo 2026</small>
-
-                        <span class="dias rojo">3 días</span>
-                    </div>
-
-
-                    <div class="alimento">
-                        <span>🍗</span>
-
-                        <div>
-                            <strong>Pechuga de pollo</strong>
-                            <small>Carnes</small>
-                        </div>
-
-                        <small>22 mayo 2026</small>
-
-                        <span class="dias naranja">4 días</span>
-                    </div>
-
-
-                    <div class="alimento">
-                        <span>🥬</span>
-
-                        <div>
-                            <strong>Lechuga</strong>
-                            <small>Verduras</small>
-                        </div>
-
-                        <small>23 mayo 2026</small>
-
-                        <span class="dias amarillo">5 días</span>
-                    </div>
-
-
-                    <div class="alimento">
-                        <span>🥛</span>
-
-                        <div>
-                            <strong>Yogur natural</strong>
-                            <small>Lácteos</small>
-                        </div>
-
-                        <small>24 mayo 2026</small>
-
-                        <span class="dias amarillo">6 días</span>
-                    </div>
-
-                    <button 
-                        class="btn-completo"
-                        onclick="mostrar('vencer')"
-                    >
+                    <button class="btn-eco-secondary w-100 mt-3" onclick="mostrar('vencer')">
                         Ver todos los próximos a vencer
                     </button>
-
                 </div>
 
-
-                <!-- IMPACTO -->
-
-                <div class="panel">
-
-                    <div class="panel-titulo">
+                <!-- PANEL: TU IMPACTO ESTA SEMANA -->
+                <div class="eco-panel">
+                    <div class="panel-header">
                         <h3>Tu impacto esta semana</h3>
-
-                        <button onclick="mostrar('estadisticas')">
-                            Ver más
-                        </button>
+                        <button class="panel-link-btn" onclick="mostrar('estadisticas')">Ver más</button>
                     </div>
 
-                    <div class="grafico">
-
-                        <div class="grafico-linea"></div>
-
-                        <div class="dias-semana">
-                            <span>Lun</span>
-                            <span>Mar</span>
-                            <span>Mié</span>
-                            <span>Jue</span>
-                            <span>Vie</span>
-                            <span>Sáb</span>
-                            <span>Dom</span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="impacto">
-
-                        <span>🌿</span>
-
+                    <div class="impact-metric-box">
+                        <span class="metric-icon">🌿</span>
                         <div>
                             <strong>Alimentos aprovechados</strong>
                             <h2>18</h2>
                             <small>+12% vs semana pasada</small>
                         </div>
-
                     </div>
 
+                    <!-- GRÁFICO SEMANAL -->
+                    <div class="chart-container-mock">
+                        <div class="chart-bar" style="height: 45%;" title="Lunes: 4"></div>
+                        <div class="chart-bar" style="height: 65%;" title="Martes: 6"></div>
+                        <div class="chart-bar" style="height: 50%;" title="Miércoles: 5"></div>
+                        <div class="chart-bar" style="height: 80%;" title="Jueves: 8"></div>
+                        <div class="chart-bar" style="height: 60%;" title="Viernes: 6"></div>
+                        <div class="chart-bar" style="height: 90%;" title="Sábado: 9"></div>
+                        <div class="chart-bar" style="height: 100%;" title="Domingo: 10"></div>
+                    </div>
+                    <div class="chart-days-row">
+                        <span>Lun</span>
+                        <span>Mar</span>
+                        <span>Mié</span>
+                        <span>Jue</span>
+                        <span>Vie</span>
+                        <span>Sáb</span>
+                        <span>Dom</span>
+                    </div>
 
-                    <div class="camino">
-
-                        🌎
-
+                    <div class="eco-encouragement-card">
+                        <span class="globe-icon">🌎</span>
                         <div>
                             <strong>¡Vas por buen camino!</strong>
-
-                            <p>
-                                Has evitado que 4,2 kg de alimentos
-                                se desperdicien esta semana.
-                            </p>
+                            <p>Has evitado que 4,2 kg de alimentos se desperdicien esta semana.</p>
                         </div>
-
                     </div>
-
                 </div>
 
             </div>
 
-
-            <!-- RECETAS -->
-
-            <div class="panel recetas">
-
-                <div class="panel-titulo">
+            <!-- SECCIÓN: RECETAS RECOMENDADAS -->
+            <div class="eco-panel">
+                <div class="panel-header">
                     <h3>Recetas recomendadas para ti</h3>
-
-                    <button onclick="mostrar('recetas')">
-                        Ver todas las recetas
-                    </button>
+                    <button class="panel-link-btn" onclick="mostrar('recetas')">Ver más recetas &gt;</button>
                 </div>
 
-
-                <div class="recetas-grid">
-
-                    <div class="receta">
-                        <div class="foto-receta">🥗</div>
-                        <strong>Ensalada fresca</strong>
-                        <small>◷ 10 min</small>
-                    </div>
-
-                    <div class="receta">
-                        <div class="foto-receta">🥘</div>
-                        <strong>Salteado de verduras</strong>
-                        <small>◷ 35 min</small>
-                    </div>
-
-                    <div class="receta">
-                        <div class="foto-receta">🍓</div>
-                        <strong>Batido de fresas</strong>
-                        <small>◷ 5 min</small>
-                    </div>
-
-                    <div class="receta">
-                        <div class="foto-receta">🍳</div>
-                        <strong>Tortilla de verduras</strong>
-                        <small>◷ 12 min</small>
-                    </div>
-
+                <div class="recipe-cards-grid" id="recetasInicioGrid">
+                    <!-- Tarjetas de recetas generadas dinámicamente -->
                 </div>
-
             </div>
 
         </section>
 
 
-        <!-- ================= ALIMENTOS ================= -->
-
-        <section id="alimentos" class="seccion">
-
-            <div class="titulo">
-                <div>
+        <!-- =========================================================
+             VISTA 2: MIS ALIMENTOS (DESPENSA)
+             ========================================================= -->
+        <section id="alimentos" class="app-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
                     <h1>Mis alimentos 🥬</h1>
-                    <p>Administra todos los alimentos de tu despensa.</p>
+                    <p>Administra y organiza todos los alimentos de tu despensa.</p>
                 </div>
-
-                <button class="btn-verde" onclick="abrirModal()">
-                    + Agregar alimento
+                
+                <button class="btn-eco-primary" onclick="abrirModalAgregar()">
+                    <i class="bi bi-plus-lg"></i>
+                    <span>Agregar alimento</span>
                 </button>
             </div>
 
+            <!-- FILTROS POR CATEGORÍA -->
+            <div class="category-filter-pills">
+                <button class="pill-filter-btn active" onclick="filtrarCategoria('Todas', this)">Todas</button>
+                <button class="pill-filter-btn" onclick="filtrarCategoria('Frutas', this)">🍎 Frutas</button>
+                <button class="pill-filter-btn" onclick="filtrarCategoria('Verduras', this)">🥬 Verduras</button>
+                <button class="pill-filter-btn" onclick="filtrarCategoria('Lácteos', this)">🥛 Lácteos</button>
+                <button class="pill-filter-btn" onclick="filtrarCategoria('Carnes', this)">🍗 Carnes</button>
+                <button class="pill-filter-btn" onclick="filtrarCategoria('Despensa', this)">🥫 Despensa</button>
+            </div>
 
-            <div class="lista-alimentos">
-
-                <div class="producto">
-                    <div class="producto-imagen">🍓</div>
-                    <h3>Fresas</h3>
-                    <p>Frutas · 250 g</p>
-                    <span class="dias rojo">3 días</span>
-                    <button onclick="verDetalle('Fresas','🍓','Frutas · 250 g')">
-                        Ver detalle
-                    </button>
-                </div>
-
-
-                <div class="producto">
-                    <div class="producto-imagen">🥛</div>
-                    <h3>Leche</h3>
-                    <p>Lácteos · 1 litro</p>
-                    <span class="dias rojo">2 días</span>
-                    <button onclick="verDetalle('Leche','🥛','Lácteos · 1 litro')">
-                        Ver detalle
-                    </button>
-                </div>
-
-
-                <div class="producto">
-                    <div class="producto-imagen">🥬</div>
-                    <h3>Lechuga</h3>
-                    <p>Verduras · 1 unidad</p>
-                    <span class="dias amarillo">5 días</span>
-                    <button onclick="verDetalle('Lechuga','🥬','Verduras · 1 unidad')">
-                        Ver detalle
-                    </button>
-                </div>
-
-
-                <div class="producto">
-                    <div class="producto-imagen">🍅</div>
-                    <h3>Tomate</h3>
-                    <p>Verduras · 500 g</p>
-                    <span class="dias amarillo">8 días</span>
-                    <button onclick="verDetalle('Tomate','🍅','Verduras · 500 g')">
-                        Ver detalle
-                    </button>
-                </div>
-
+            <!-- GRILLA DE ALIMENTOS -->
+            <div class="food-cards-grid" id="alimentosGrid">
+                <!-- Generado dinámicamente con JavaScript -->
             </div>
 
         </section>
 
 
-        <!-- ================= VENCER ================= -->
-
-        <section id="vencer" class="seccion">
-
-            <div class="titulo">
-                <div>
+        <!-- =========================================================
+             VISTA 3: PRÓXIMOS A VENCER
+             ========================================================= -->
+        <section id="vencer" class="app-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
                     <h1>Próximos a vencer ⏰</h1>
                     <p>Revisa estos alimentos antes de que se desperdicien.</p>
                 </div>
             </div>
 
-            <div class="alerta">
-                💡 Consume primero los alimentos que están más próximos a vencer.
+            <div class="alert alert-warning d-flex align-items-center gap-3 border-0 rounded-4 p-3 mb-4" style="background:#FFF6E9; color:#9E5700;">
+                <i class="bi bi-lightbulb-fill fs-4 text-warning"></i>
+                <div>
+                    <strong>Consejo EcoFood:</strong> Consume primero los alimentos con menos días restantes para reducir el desperdicio a cero.
+                </div>
             </div>
 
-            <div class="lista-alimentos">
-
-                <div class="producto">
-                    <div class="producto-imagen">🥛</div>
-                    <h3>Leche</h3>
-                    <p>Vence próximamente</p>
-                    <span class="dias rojo">2 días</span>
-                </div>
-
-                <div class="producto">
-                    <div class="producto-imagen">🍓</div>
-                    <h3>Fresas</h3>
-                    <p>Vence próximamente</p>
-                    <span class="dias rojo">3 días</span>
-                </div>
-
-                <div class="producto">
-                    <div class="producto-imagen">🍗</div>
-                    <h3>Pechuga de pollo</h3>
-                    <p>Vence próximamente</p>
-                    <span class="dias naranja">4 días</span>
-                </div>
-
-                <div class="producto">
-                    <div class="producto-imagen">🥬</div>
-                    <h3>Lechuga</h3>
-                    <p>Vence próximamente</p>
-                    <span class="dias amarillo">5 días</span>
-                </div>
-
+            <div class="food-cards-grid" id="vencerCardsGrid">
+                <!-- Generado dinámicamente -->
             </div>
 
         </section>
 
 
-        <!-- ================= RECETAS ================= -->
-
-        <section id="recetas" class="seccion">
-
-            <div class="titulo">
-                <div>
+        <!-- =========================================================
+             VISTA 4: RECETAS PARA TI
+             ========================================================= -->
+        <section id="recetas" class="app-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
                     <h1>Recetas para ti 🍓</h1>
-                    <p>Ideas para aprovechar tus alimentos.</p>
+                    <p>Aprovecha al máximo los ingredientes que tienes en casa.</p>
                 </div>
             </div>
 
+            <!-- FILTROS DE RECETAS -->
+            <div class="category-filter-pills">
+                <button class="pill-filter-btn active" onclick="filtrarRecetas('Todas', this)">Todas</button>
+                <button class="pill-filter-btn" onclick="filtrarRecetas('Desayunos', this)">Desayunos</button>
+                <button class="pill-filter-btn" onclick="filtrarRecetas('Almuerzos', this)">Almuerzos</button>
+                <button class="pill-filter-btn" onclick="filtrarRecetas('Cenas', this)">Cenas</button>
+            </div>
 
-            <div class="recetas-completas">
-
-                <div class="receta-grande">
-                    <div>🥗</div>
-                    <h3>Ensalada fresca</h3>
-                    <p>Una receta rápida para aprovechar tus verduras.</p>
-                    <span>◷ 10 min</span>
-                </div>
-
-                <div class="receta-grande">
-                    <div>🥘</div>
-                    <h3>Salteado de verduras</h3>
-                    <p>Una comida deliciosa y fácil de preparar.</p>
-                    <span>◷ 35 min</span>
-                </div>
-
-                <div class="receta-grande">
-                    <div>🍓</div>
-                    <h3>Batido de fresas</h3>
-                    <p>Perfecto para aprovechar frutas maduras.</p>
-                    <span>◷ 5 min</span>
-                </div>
-
-                <div class="receta-grande">
-                    <div>🍳</div>
-                    <h3>Tortilla de verduras</h3>
-                    <p>Una opción sencilla para tu desayuno.</p>
-                    <span>◷ 12 min</span>
-                </div>
-
+            <div class="recipe-cards-grid" id="recetasCompletasGrid">
+                <!-- Generado dinámicamente -->
             </div>
 
         </section>
 
 
-        <!-- ================= RECORDATORIOS ================= -->
-
-        <section id="recordatorios" class="seccion">
-
-            <div class="titulo">
-                <div>
+        <!-- =========================================================
+             VISTA 5: RECORDATORIOS
+             ========================================================= -->
+        <section id="recordatorios" class="app-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
                     <h1>Recordatorios 🔔</h1>
-                    <p>Recibe avisos para no olvidar tus alimentos.</p>
+                    <p>Avisos automáticos para que nunca olvides consumir tus alimentos a tiempo.</p>
                 </div>
             </div>
 
-            <div class="panel">
-
-                <div class="recordatorio">
-                    🥛
-                    <div>
-                        <strong>Leche próxima a vencer</strong>
-                        <small>Recordatorio para hoy</small>
-                    </div>
-                    <button onclick="completar(this)">✓</button>
+            <div class="eco-panel">
+                <div id="listaRecordatorios" class="d-flex flex-column gap-3">
+                    <!-- Generado dinámicamente -->
                 </div>
-
-                <div class="recordatorio">
-                    🍓
-                    <div>
-                        <strong>Fresas próximas a vencer</strong>
-                        <small>Recordatorio para mañana</small>
-                    </div>
-                    <button onclick="completar(this)">✓</button>
-                </div>
-
-                <div class="recordatorio">
-                    🥬
-                    <div>
-                        <strong>Revisar verduras</strong>
-                        <small>En 3 días</small>
-                    </div>
-                    <button onclick="completar(this)">✓</button>
-                </div>
-
             </div>
 
         </section>
 
 
-        <!-- ================= ESTADÍSTICAS ================= -->
-
-        <section id="estadisticas" class="seccion">
-
-            <div class="titulo">
-
-                <div>
+        <!-- =========================================================
+             VISTA 6: ESTADÍSTICAS
+             ========================================================= -->
+        <section id="estadisticas" class="app-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
                     <h1>Estadísticas 📊</h1>
-                    <p>Mira tu impacto positivo.</p>
+                    <p>Mira tu impacto positivo en el planeta y en tu economía.</p>
                 </div>
-
             </div>
 
-            <div class="estadisticas">
-
-                <div class="tarjeta">
-                    <div>
+            <div class="resumen-cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                
+                <div class="resumen-card card-green">
+                    <div class="resumen-card-info">
                         <p>Alimentos aprovechados</p>
                         <h2>18</h2>
+                        <small>Esta semana</small>
                     </div>
+                    <div class="resumen-card-icon"><i class="bi bi-check2-circle"></i></div>
                 </div>
 
-                <div class="tarjeta">
-                    <div>
+                <div class="resumen-card card-peach">
+                    <div class="resumen-card-info">
                         <p>Desperdicio evitado</p>
                         <h2>4,2 kg</h2>
+                        <small>CO2 ahorrado: 10,5 kg</small>
                     </div>
+                    <div class="resumen-card-icon"><i class="bi bi-cloud-slash"></i></div>
                 </div>
 
-                <div class="tarjeta">
-                    <div>
+                <div class="resumen-card card-gold">
+                    <div class="resumen-card-info">
                         <p>Dinero ahorrado</p>
                         <h2>$34.000</h2>
+                        <small>Acumulado este mes</small>
                     </div>
+                    <div class="resumen-card-icon"><i class="bi bi-wallet2"></i></div>
                 </div>
 
-                <div class="tarjeta">
-                    <div>
-                        <p>Días de ahorro</p>
-                        <h2>7</h2>
+                <div class="resumen-card card-green">
+                    <div class="resumen-card-info">
+                        <p>Días de racha eco</p>
+                        <h2>7 días</h2>
+                        <small>¡Sigue así!</small>
                     </div>
+                    <div class="resumen-card-icon"><i class="bi bi-fire"></i></div>
                 </div>
 
             </div>
 
-            <div class="panel">
-
-                <h3>Alimentos aprovechados esta semana</h3>
-
-                <div class="barras">
-
-                    <div style="height:40%"></div>
-                    <div style="height:60%"></div>
-                    <div style="height:45%"></div>
-                    <div style="height:75%"></div>
-                    <div style="height:55%"></div>
-                    <div style="height:80%"></div>
-                    <div style="height:95%"></div>
-
+            <div class="eco-panel mt-4">
+                <div class="panel-header">
+                    <h3>Alimentos aprovechados día por día</h3>
                 </div>
-
+                <div class="chart-container-mock" style="height: 180px;">
+                    <div class="chart-bar" style="height: 40%;"></div>
+                    <div class="chart-bar" style="height: 60%;"></div>
+                    <div class="chart-bar" style="height: 45%;"></div>
+                    <div class="chart-bar" style="height: 75%;"></div>
+                    <div class="chart-bar" style="height: 55%;"></div>
+                    <div class="chart-bar" style="height: 80%;"></div>
+                    <div class="chart-bar" style="height: 95%;"></div>
+                </div>
+                <div class="chart-days-row">
+                    <span>Lunes</span>
+                    <span>Martes</span>
+                    <span>Miércoles</span>
+                    <span>Jueves</span>
+                    <span>Viernes</span>
+                    <span>Sábado</span>
+                    <span>Domingo</span>
+                </div>
             </div>
 
         </section>
 
 
-        <!-- ================= CONSEJOS ================= -->
-
-        <section id="consejos" class="seccion">
-
-            <div class="titulo">
-
-                <div>
+        <!-- =========================================================
+             VISTA 7: CONSEJOS
+             ========================================================= -->
+        <section id="consejos" class="app-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
                     <h1>Consejos 🌱</h1>
-                    <p>Pequeñas acciones, grandes cambios.</p>
+                    <p>Pequeñas acciones, grandes cambios para tu hogar.</p>
                 </div>
-
             </div>
 
-            <div class="consejos">
-
-                <div>
-                    <span>🧊</span>
-                    <h3>Organiza tu nevera</h3>
-                    <p>
-                        Coloca adelante los alimentos próximos a vencer.
-                    </p>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="eco-panel h-100">
+                        <div class="fs-1 mb-2">🧊</div>
+                        <h4 class="fw-bold mb-2">Organiza tu nevera</h4>
+                        <p class="text-muted">Aplica el método FIFO (First In, First Out): coloca al frente los alimentos que vencen pronto y guarda atrás los recién comprados.</p>
+                    </div>
                 </div>
 
-                <div>
-                    <span>📝</span>
-                    <h3>Planea tus compras</h3>
-                    <p>
-                        Compra solamente lo que realmente necesitas.
-                    </p>
+                <div class="col-md-6">
+                    <div class="eco-panel h-100">
+                        <div class="fs-1 mb-2">📝</div>
+                        <h4 class="fw-bold mb-2">Planea tus compras</h4>
+                        <p class="text-muted">Revisa tu despensa antes de ir al supermercado y haz una lista estricta para evitar compras impulsivas.</p>
+                    </div>
                 </div>
 
-                <div>
-                    <span>🥗</span>
-                    <h3>Aprovecha las sobras</h3>
-                    <p>
-                        Convierte las sobras en nuevas recetas.
-                    </p>
+                <div class="col-md-6">
+                    <div class="eco-panel h-100">
+                        <div class="fs-1 mb-2">🥗</div>
+                        <h4 class="fw-bold mb-2">Aprovecha las sobras</h4>
+                        <p class="text-muted">Las verduras maduras son ideales para cremas, batidos o tortillas. ¡Nunca subestimes una fruta madura!</p>
+                    </div>
                 </div>
 
-                <div>
-                    <span>🌎</span>
-                    <h3>Cuida el planeta</h3>
-                    <p>
-                        Reducir el desperdicio ayuda al medio ambiente.
-                    </p>
+                <div class="col-md-6">
+                    <div class="eco-panel h-100">
+                        <div class="fs-1 mb-2">🌎</div>
+                        <h4 class="fw-bold mb-2">Cuida el planeta</h4>
+                        <p class="text-muted">El desperdicio de comida representa hasta el 10% de las emisiones globales de gases de efecto invernadero. Tu ahorro cuenta.</p>
+                    </div>
                 </div>
-
             </div>
 
         </section>
 
 
-        <!-- ================= CONFIGURACIÓN ================= -->
+        <!-- =========================================================
+             VISTA 8: PERFIL Y CUENTA (INTEGRACIÓN FIREBASE)
+             ========================================================= -->
+        <section id="perfil" class="app-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
+                    <h1>Perfil y Cuenta ⚙️</h1>
+                    <p>Gestiona tu sesión de Firebase y tus preferencias personales.</p>
+                </div>
+            </div>
 
-        <section id="configuracion" class="seccion">
+            <div class="eco-panel mb-4">
+                
+                <div class="profile-card-header">
+                    <div class="profile-big-avatar" id="perfilAvatar">
+                        <span>S</span>
+                    </div>
+                    <div>
+                        <h3 class="fw-bold mb-1" id="perfilNombre">Sara</h3>
+                        <p class="text-muted mb-0" id="perfilEmail">sara@ecofood.com</p>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle mt-2" id="perfilEstadoBadge">
+                            <i class="bi bi-shield-check"></i> Cuenta Activa
+                        </span>
+                    </div>
+                </div>
 
-            <div class="titulo">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="eco-form-group">
+                            <label>Nombre completo</label>
+                            <input type="text" id="configNombre" class="eco-form-control" value="Sara">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="eco-form-group">
+                            <label>Correo electrónico</label>
+                            <input type="email" id="configEmail" class="eco-form-control" value="sara@ecofood.com" readonly>
+                        </div>
+                    </div>
 
-                <div>
-                    <h1>Configuración ⚙️</h1>
-                    <p>Personaliza tu experiencia.</p>
+                    <div class="col-md-6">
+                        <div class="eco-form-group">
+                            <label>Notificaciones de vencimiento</label>
+                            <select class="eco-form-control">
+                                <option>Activadas (Avisar 2 días antes)</option>
+                                <option>Activadas (Avisar 1 día antes)</option>
+                                <option>Desactivadas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="eco-form-group">
+                            <label>Moneda de ahorro</label>
+                            <select class="eco-form-control">
+                                <option>COP ($)</option>
+                                <option>USD ($)</option>
+                                <option>EUR (€)</option>
+                                <option>MXN ($)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 mt-4 pt-3 border-top">
+                    <button class="btn-eco-primary" onclick="guardarConfiguracion()">
+                        <i class="bi bi-floppy"></i> Guardar cambios
+                    </button>
+
+                    <button class="btn btn-outline-danger px-4 rounded-3 fw-bold" id="btnAuthEstado" onclick="confirmarCerrarSesion()">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                    </button>
+
+                    <button class="btn-eco-secondary ms-auto" onclick="abrirModalAuth('login')">
+                        <i class="bi bi-arrow-repeat"></i> Cambiar cuenta
+                    </button>
                 </div>
 
             </div>
 
-            <div class="panel formulario">
-
-                <label>Nombre</label>
-                <input type="text" value="Sara">
-
-                <label>Correo electrónico</label>
-                <input type="email" value="sara@ecofood.com">
-
-                <label>Notificaciones</label>
-
-                <select>
-                    <option>Activadas</option>
-                    <option>Desactivadas</option>
-                </select>
-
-                <button class="btn-verde" onclick="guardar()">
-                    Guardar cambios
-                </button>
-
+            <!-- INFORMACIÓN DE FIREBASE -->
+            <div class="eco-panel">
+                <h5 class="fw-bold mb-2"><i class="bi bi-fire text-danger"></i> Conexión con Firebase</h5>
+                <p class="text-muted small mb-3">
+                    Esta aplicación cuenta con integración lista para Firebase Authentication. Puedes conectar tus propias credenciales en <code>firebase-config.js</code> o utilizar el modo demo interactivo.
+                </p>
+                <div class="bg-light p-3 rounded-3 font-monospace small">
+                    Estado: <span class="text-success fw-bold">✓ Sistema de autenticación listo</span>
+                </div>
             </div>
 
         </section>
 
 
-        <!-- ================= AYUDA ================= -->
-
-        <section id="ayuda" class="seccion">
-
-            <div class="titulo">
-
-                <div>
-                    <h1>Ayuda 💚</h1>
-                    <p>Estamos aquí para ayudarte.</p>
+        <!-- =========================================================
+             VISTA 9: AYUDA
+             ========================================================= -->
+        <section id="ayuda" class="app-view">
+            
+            <div class="section-header">
+                <div class="section-greeting">
+                    <h1>Ayuda y Preguntas frecuentes 💚</h1>
+                    <p>Todo lo que necesitas saber para sacarle el mayor provecho a EcoFood.</p>
                 </div>
-
             </div>
 
-            <div class="panel">
+            <div class="eco-panel">
+                <div class="accordion accordion-flush" id="faqAccordion">
+                    
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                ¿Cómo agrego un nuevo alimento?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                Puedes hacer clic en el botón verde "+ Agregar alimento" en la barra superior o en el botón central (+) en tu móvil. Luego ingresa el nombre, fecha de vencimiento, cantidad y categoría.
+                            </div>
+                        </div>
+                    </div>
 
-                <h3>Preguntas frecuentes</h3>
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                ¿Cómo funciona el inicio de sesión con Firebase?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                EcoFood utiliza Firebase Authentication para gestionar usuarios con Correo y Contraseña, Google o modo invitado. Los datos de sesión persisten automáticamente en tu navegador.
+                            </div>
+                        </div>
+                    </div>
 
-                <details>
-                    <summary>¿Cómo agrego un alimento?</summary>
-                    <p>
-                        Presiona el botón "Agregar alimento",
-                        completa los datos y guarda.
-                    </p>
-                </details>
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                ¿Cómo calcula el dinero ahorrado?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                Cada vez que marcas un alimento como consumido antes de su fecha de caducidad, EcoFood calcula el valor promedio estimado del producto y lo suma a tu impacto positivo.
+                            </div>
+                        </div>
+                    </div>
 
-                <details>
-                    <summary>¿Cómo funcionan los recordatorios?</summary>
-                    <p>
-                        EcoFood te avisa cuando un alimento
-                        está próximo a vencer.
-                    </p>
-                </details>
-
-                <details>
-                    <summary>¿Cómo veo mis estadísticas?</summary>
-                    <p>
-                        Entra en la sección Estadísticas.
-                    </p>
-                </details>
-
+                </div>
             </div>
 
         </section>
@@ -813,154 +675,320 @@
 </div>
 
 
-<!-- MODAL AGREGAR ALIMENTO -->
+<!-- =========================================================
+     BARRA DE NAVEGACIÓN INFERIOR MÓVIL (BOTTOM NAV)
+     ========================================================= -->
+<nav class="mobile-bottom-nav">
+    
+    <button class="bottom-nav-item active" onclick="mostrar('inicio')">
+        <i class="bi bi-house-door-fill"></i>
+        <span>Inicio</span>
+    </button>
 
-<div class="modal fade" id="modalAlimento">
+    <button class="bottom-nav-item" onclick="mostrar('alimentos')">
+        <i class="bi bi-basket2-fill"></i>
+        <span>Alimentos</span>
+    </button>
 
-    <div class="modal-dialog">
+    <!-- Botón flotante central (+) -->
+    <button class="bottom-nav-fab" onclick="abrirModalAgregar()" title="Agregar alimento">
+        <i class="bi bi-plus-lg"></i>
+    </button>
 
-        <div class="modal-content">
+    <button class="bottom-nav-item" onclick="mostrar('recetas')">
+        <i class="bi bi-journal-richtext"></i>
+        <span>Recetas</span>
+    </button>
 
-            <div class="modal-header">
+    <button class="bottom-nav-item" onclick="mostrar('perfil')">
+        <i class="bi bi-person-fill"></i>
+        <span>Perfil</span>
+    </button>
 
-                <h5 class="modal-title">
-                    Agregar alimento 🥕
-                </h5>
-
-                <button 
-                    class="btn-close"
-                    data-bs-dismiss="modal">
-                </button>
-
-            </div>
-
-
-            <div class="modal-body">
-
-                <label>Nombre del alimento</label>
-
-                <input 
-                    id="nombreAlimento"
-                    class="form-control mb-3"
-                    placeholder="Ej. Manzana"
-                >
-
-
-                <label>Fecha de vencimiento</label>
-
-                <input 
-                    id="fecha"
-                    type="date"
-                    class="form-control mb-3"
-                >
+</nav>
 
 
-                <label>Cantidad</label>
-
-                <input 
-                    id="cantidad"
-                    class="form-control mb-3"
-                    placeholder="Ej. 1 kg"
-                >
-
-
-                <label>Categoría</label>
-
-                <select id="categoria" class="form-select mb-3">
-
-                    <option>Frutas</option>
-                    <option>Verduras</option>
-                    <option>Lácteos</option>
-                    <option>Carnes</option>
-                    <option>Otros</option>
-
-                </select>
-
-
-                <button 
-                    class="btn-verde w-100"
-                    onclick="agregarAlimento()"
-                >
-                    Guardar alimento
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- MODAL DETALLE -->
-
-<div class="modal fade" id="modalDetalle">
-
+<!-- =========================================================
+     MODAL: AGREGAR ALIMENTO (ESTILO DE LA IMAGEN)
+     ========================================================= -->
+<div class="modal fade" id="modalAlimento" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content eco-modal">
+            
+            <div class="modal-header eco-modal-header">
+                <h5 class="modal-title eco-modal-title">
+                    <i class="bi bi-plus-circle text-success me-1"></i> Agregar alimento
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-        <div class="modal-content">
+            <div class="modal-body eco-modal-body">
+                
+                <!-- ÁREA DE SUBIDA DE FOTO CON LÍNEA DISCONTINUA -->
+                <div class="dashed-upload-box" onclick="document.getElementById('inputFotoAlimento').click()">
+                    <input type="file" id="inputFotoAlimento" accept="image/*" style="display: none;" onchange="previsualizarFotoAlimento(event)">
+                    <div id="uploadBoxContenido">
+                        <div class="dashed-upload-icon">
+                            <i class="bi bi-camera"></i>
+                        </div>
+                        <p>Agregar foto</p>
+                        <small>Toca para tomar o seleccionar una imagen</small>
+                    </div>
+                    <img id="previewFotoSubida" class="upload-preview-img" alt="Foto del alimento">
+                </div>
 
-            <div class="modal-body detalle">
+                <div class="eco-form-group">
+                    <label>Nombre del alimento</label>
+                    <input type="text" id="nombreAlimento" class="eco-form-control" placeholder="Ej. Manzana, Fresas, Leche...">
+                </div>
 
-                <div id="detalleEmoji"></div>
+                <div class="eco-form-group">
+                    <label>Fecha de vencimiento</label>
+                    <input type="date" id="fechaAlimento" class="eco-form-control">
+                </div>
 
-                <h2 id="detalleNombre"></h2>
+                <div class="eco-form-group">
+                    <label>Cantidad</label>
+                    <input type="text" id="cantidadAlimento" class="eco-form-control" placeholder="Ej. 250 g, 1 litro, 3 unidades">
+                </div>
 
-                <p id="detalleInfo"></p>
+                <div class="eco-form-group">
+                    <label>Categoría</label>
+                    <select id="categoriaAlimento" class="eco-form-control">
+                        <option value="Frutas">🍎 Frutas</option>
+                        <option value="Verduras">🥬 Verduras</option>
+                        <option value="Lácteos">🥛 Lácteos</option>
+                        <option value="Carnes">🍗 Carnes</option>
+                        <option value="Despensa">🥫 Despensa</option>
+                        <option value="Otros">🍞 Otros</option>
+                    </select>
+                </div>
 
-                <button 
-                    class="btn-verde"
-                    data-bs-dismiss="modal"
-                >
-                    Cerrar
+                <button class="btn-eco-primary w-100 mt-3 justify-content-center" onclick="guardarNuevoAlimento()">
+                    <i class="bi bi-check2"></i> Guardar alimento
                 </button>
 
             </div>
 
         </div>
-
     </div>
-
 </div>
 
+
+<!-- =========================================================
+     MODAL: DETALLE DEL ALIMENTO (ESTILO DE LA IMAGEN)
+     ========================================================= -->
+<div class="modal fade" id="modalDetalleAlimento" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content eco-modal">
+            
+            <div class="modal-header eco-modal-header">
+                <h5 class="modal-title eco-modal-title">
+                    <i class="bi bi-chevron-left me-1" style="cursor:pointer;" data-bs-dismiss="modal"></i> Detalle del alimento
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body eco-modal-body food-detail-view-card">
+                
+                <!-- FOTO HERO CON BOTÓN DE CÁMARA -->
+                <div class="detail-hero-media" id="detalleHeroMedia">
+                    <span id="detalleEmojiGrande">🍓</span>
+                </div>
+
+                <div class="detail-title-row">
+                    <h2 id="detalleTituloNombre">Fresas</h2>
+                    <span class="fs-5 text-muted" style="cursor:pointer;" title="Editar"><i class="bi bi-pencil"></i></span>
+                </div>
+
+                <div class="detail-info-row">
+                    <span class="label">Fecha de vencimiento</span>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="val" id="detalleFechaVencimiento">17 mayo 2026</span>
+                        <span class="expiry-badge badge-red" id="detalleBadgeDias">4 días</span>
+                    </div>
+                </div>
+
+                <div class="detail-info-row">
+                    <span class="label">Cantidad</span>
+                    <span class="val" id="detalleCantidad">250 g</span>
+                </div>
+
+                <div class="detail-info-row">
+                    <span class="label">Categoría</span>
+                    <span class="val" id="detalleCategoria">Frutas</span>
+                </div>
+
+                <div class="detail-actions-group">
+                    <button class="btn-eco-primary justify-content-center" id="btnMarcarConsumido" onclick="marcarAlimentoConsumido()">
+                        <i class="bi bi-check2-circle"></i> Marcar como consumido
+                    </button>
+                    
+                    <button class="btn-eco-secondary justify-content-center" data-bs-dismiss="modal">
+                        Editar alimento
+                    </button>
+
+                    <button class="btn btn-link text-danger text-decoration-none small text-center mt-1" onclick="eliminarAlimentoActual()">
+                        <i class="bi bi-trash"></i> Eliminar de la despensa
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- =========================================================
+     MODAL: AUTENTICACIÓN FIREBASE (LOGIN / REGISTRO / RECUPERAR)
+     ========================================================= -->
+<div class="modal fade" id="modalAuth" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content eco-modal">
+            
+            <div class="modal-header eco-modal-header text-center justify-content-center position-relative">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="logo-leaf-icon" style="width:32px;height:32px;font-size:16px;">
+                        <i class="bi bi-tree-fill"></i>
+                    </div>
+                    <h5 class="modal-title eco-modal-title">EcoFood Auth</h5>
+                </div>
+                <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body eco-modal-body auth-modal-wrapper">
+                
+                <!-- PESTAÑAS LOGIN / REGISTRO -->
+                <div class="auth-tabs-nav">
+                    <button class="auth-tab-btn active" id="tabBtnLogin" onclick="cambiarTabAuth('login')">
+                        Iniciar Sesión
+                    </button>
+                    <button class="auth-tab-btn" id="tabBtnRegister" onclick="cambiarTabAuth('register')">
+                        Crear Cuenta
+                    </button>
+                </div>
+
+                <!-- ALERTA DE MENSAJES -->
+                <div id="authAlert" class="auth-alert-message"></div>
+
+                <!-- BOTÓN GOOGLE AUTH -->
+                <button class="auth-social-btn" onclick="manejarLoginGoogle()">
+                    <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                    </svg>
+                    <span>Continuar con Google</span>
+                </button>
+
+                <div class="auth-divider">
+                    <span>o con tu correo</span>
+                </div>
+
+                <!-- FORMULARIO: INICIAR SESIÓN -->
+                <form id="formLogin" onsubmit="manejarLoginEmail(event)">
+                    <div class="eco-form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" id="loginEmail" class="eco-form-control" placeholder="nombre@ejemplo.com" required value="sara@ecofood.com">
+                    </div>
+
+                    <div class="eco-form-group">
+                        <label>Contraseña</label>
+                        <div class="position-relative">
+                            <input type="password" id="loginPassword" class="eco-form-control" placeholder="••••••••" required value="123456">
+                            <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3 text-muted" style="cursor:pointer;" onclick="togglePasswordVis('loginPassword', this)"></i>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="recordarSesion" checked>
+                            <label class="form-check-label small text-muted" for="recordarSesion">Recordarme</label>
+                        </div>
+                        <a href="javascript:void(0)" class="small text-success text-decoration-none fw-bold" onclick="mostrarRecuperarPass()">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="btn-eco-primary w-100 justify-content-center">
+                        <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                    </button>
+                </form>
+
+                <!-- FORMULARIO: REGISTRO -->
+                <form id="formRegister" style="display: none;" onsubmit="manejarRegistroEmail(event)">
+                    <div class="eco-form-group">
+                        <label>Nombre completo</label>
+                        <input type="text" id="regNombre" class="eco-form-control" placeholder="Ej. Sara García" required>
+                    </div>
+
+                    <div class="eco-form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" id="regEmail" class="eco-form-control" placeholder="nombre@ejemplo.com" required>
+                    </div>
+
+                    <div class="eco-form-group">
+                        <label>Contraseña (mínimo 6 caracteres)</label>
+                        <div class="position-relative">
+                            <input type="password" id="regPassword" class="eco-form-control" placeholder="••••••••" required minlength="6">
+                            <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3 text-muted" style="cursor:pointer;" onclick="togglePasswordVis('regPassword', this)"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-eco-primary w-100 justify-content-center mt-3">
+                        <i class="bi bi-person-plus"></i> Crear Cuenta
+                    </button>
+                </form>
+
+                <!-- FORMULARIO: RECUPERAR CONTRASEÑA -->
+                <form id="formRecover" style="display: none;" onsubmit="manejarRecuperarPass(event)">
+                    <p class="text-muted small mb-3">
+                        Ingresa tu correo y te enviaremos un enlace seguro para restablecer tu contraseña.
+                    </p>
+                    <div class="eco-form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" id="recoverEmail" class="eco-form-control" placeholder="nombre@ejemplo.com" required>
+                    </div>
+
+                    <button type="submit" class="btn-eco-primary w-100 justify-content-center mb-2">
+                        <i class="bi bi-envelope"></i> Enviar correo de recuperación
+                    </button>
+
+                    <button type="button" class="btn btn-link text-muted w-100 text-decoration-none small" onclick="cambiarTabAuth('login')">
+                        Volver a Iniciar Sesión
+                    </button>
+                </form>
+
+                <!-- MODO INVITADO -->
+                <div class="text-center mt-3 pt-3 border-top">
+                    <button class="btn btn-sm btn-link text-muted text-decoration-none" onclick="manejarModoInvitado()">
+                        <i class="bi bi-person-bounding-box"></i> Probar en Modo Invitado (Demo)
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- =========================================================
+     SCRIPTS & FIREBASE SDK
+     ========================================================= -->
+
+<!-- Firebase App & Auth SDKs (Compat v10) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
 
 <!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script 
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-</script>
+<!-- Configuración de Firebase -->
+<script src="firebase-config.js"></script>
 
-<!-- JavaScript propio -->
-
+<!-- Lógica de la aplicación EcoFood -->
 <script src="script.js"></script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
