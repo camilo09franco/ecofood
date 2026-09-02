@@ -14,12 +14,13 @@
  */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyYOUR_API_KEY_HERE_ECOFOOD",
-    authDomain: "ecofood-app.firebaseapp.com",
-    projectId: "ecofood-app",
-    storageBucket: "ecofood-app.appspot.com",
-    messagingSenderId: "123456789012",
-    appId: "1:123456789012:web:abcdef1234567890"
+    apiKey: "AIzaSyAOI5iYNtVQLLSE9cydz_ubW9_g0higzkA",
+    authDomain: "ecofood-43441.firebaseapp.com",
+    projectId: "ecofood-43441",
+    storageBucket: "ecofood-43441.firebasestorage.app",
+    messagingSenderId: "1040418438571",
+    appId: "1:1040418438571:web:cdcd0217e148fa2f6626ee",
+    measurementId: "G-GT05F4H667"
 };
 
 // Variable para verificar si Firebase está inicializado con credenciales reales
