@@ -18,6 +18,20 @@
 
     <!-- CSS Propio -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Guardián de acceso obligatorio: si no hay sesión iniciada, redirige a login.html -->
+    <script>
+        (function() {
+            try {
+                var session = localStorage.getItem("ecofood_user_session");
+                if (!session || !JSON.parse(session)) {
+                    window.location.replace("login.html");
+                }
+            } catch(e) {
+                window.location.replace("login.html");
+            }
+        })();
+    </script>
 </head>
 <body>
 

@@ -825,7 +825,7 @@ function abrirMenuOPerfil() {
 async function confirmarCerrarSesion() {
     if (confirm("¿Deseas cerrar tu sesión actual en EcoFood?")) {
         await cerrarSesion();
-        mostrarAlertaToast("Has cerrado tu sesión. Ahora puedes ingresar con otra cuenta.");
+        window.location.replace("login.html");
     }
 }
 

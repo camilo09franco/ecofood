@@ -316,21 +316,45 @@ async function cerrarSesion() {
  * Listener global del estado de autenticación
  */
 function inicializarAuthListener() {
+    const esPaginaLogin = window.location.pathname.toLowerCase().includes("login.html");
+    const esPaginaInterior = window.location.pathname.toLowerCase().includes("index.html") || 
+                             window.location.pathname.endsWith("/") ||
+                             (!window.location.pathname.includes(".html"));
+
     if (isFirebaseReady && auth) {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 currentUser = user;
+                guardarSesionLocal(currentUser);
                 actualizarUIConUsuario(user);
+                if (esPaginaLogin) {
+                    window.location.replace("Index.html");
+                }
             } else {
                 currentUser = null;
+                guardarSesionLocal(null);
                 actualizarUIConUsuario(null);
+                if (esPaginaInterior) {
+                    window.location.replace("login.html");
+                }
             }
         });
     } else {
         // Cargar usuario guardado en localStorage para demo
         const sesionGuardada = cargarSesionLocal();
-        currentUser = sesionGuardada;
-        actualizarUIConUsuario(currentUser);
+        if (sesionGuardada) {
+            currentUser = sesionGuardada;
+            actualizarUIConUsuario(currentUser);
+            if (esPaginaLogin) {
+                window.location.replace("Index.html");
+            }
+        } else {
+            currentUser = null;
+            actualizarUIConUsuario(null);
+            if (esPaginaInterior) {
+                window.location.replace("login.html");
+            }
+        }
     }
 }
 
