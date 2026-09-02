@@ -239,6 +239,13 @@ async function loginConGoogle() {
             actualizarUIConUsuario(currentUser);
             return { success: true, user: currentUser };
         } catch (error) {
+            console.warn("Firebase Google Popup:", error);
+            if (error.code === "auth/unauthorized-domain" || error.code === "auth/operation-not-allowed") {
+                cerrarModalAuth();
+                abrirModalGoogleLogin();
+                mostrarAlertaToast("Aviso: Agrega '127.0.0.1' en Firebase Console > Auth > Configuración. Puedes ingresar con el selector aquí:");
+                return { success: false, isCustomGoogle: true };
+            }
             return { success: false, error: traducirErrorFirebase(error.code) };
         }
     } else {
