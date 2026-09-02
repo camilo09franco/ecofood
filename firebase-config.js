@@ -49,10 +49,12 @@ try {
 }
 
 // =========================================================
-// SISTEMA DE SESIÓN LOCAL (DEMO / PERSISTENCIA)
+// SISTEMA DE SESIÓN LOCAL & REGISTRO MULTIUSUARIO
 // =========================================================
 
 const DEMO_STORAGE_KEY = "ecofood_user_session";
+const REGISTERED_USERS_KEY = "ecofood_registered_users";
+const GOOGLE_ACCOUNTS_KEY = "ecofood_google_accounts";
 
 // Cargar usuario guardado previamente en demo
 function cargarSesionLocal() {
@@ -64,15 +66,8 @@ function cargarSesionLocal() {
     } catch (e) {
         console.error("Error leyendo sesión local:", e);
     }
-    // Usuario demo por defecto (Sara de la maqueta)
-    return {
-        uid: "demo-user-sara-123",
-        displayName: "Sara",
-        email: "sara@ecofood.com",
-        photoURL: null,
-        isAnonymous: false,
-        isDemo: true
-    };
+    // Si no hay sesión iniciada, devolvemos null para que la app no imponga ningún nombre por defecto
+    return null;
 }
 
 // Guardar sesión local
@@ -81,6 +76,56 @@ function guardarSesionLocal(user) {
         localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(user));
     } else {
         localStorage.removeItem(DEMO_STORAGE_KEY);
+    }
+}
+
+// Gestión de base de datos local de usuarios registrados
+function obtenerUsuariosRegistrados() {
+    try {
+        const raw = localStorage.getItem(REGISTERED_USERS_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function guardarUsuarioRegistrado(user) {
+    try {
+        const usuarios = obtenerUsuariosRegistrados();
+        const index = usuarios.findIndex(u => u.email.toLowerCase() === user.email.toLowerCase());
+        if (index >= 0) {
+            usuarios[index] = { ...usuarios[index], ...user };
+        } else {
+            usuarios.push(user);
+        }
+        localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(usuarios));
+    } catch (e) {
+        console.error("Error guardando usuario registrado:", e);
+    }
+}
+
+// Gestión de cuentas Google usadas localmente
+function obtenerCuentasGoogle() {
+    try {
+        const raw = localStorage.getItem(GOOGLE_ACCOUNTS_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function guardarCuentaGoogle(account) {
+    try {
+        const cuentas = obtenerCuentasGoogle();
+        const index = cuentas.findIndex(c => c.email.toLowerCase() === account.email.toLowerCase());
+        if (index >= 0) {
+            cuentas[index] = { ...cuentas[index], ...account };
+        } else {
+            cuentas.unshift(account);
+        }
+        localStorage.setItem(GOOGLE_ACCOUNTS_KEY, JSON.stringify(cuentas));
+    } catch (e) {
+        console.error("Error guardando cuenta Google:", e);
     }
 }
 
@@ -96,23 +141,39 @@ async function loginConEmail(email, password) {
         try {
             const userCredential = await auth.signInWithEmailAndPassword(email, password);
             currentUser = userCredential.user;
+            guardarSesionLocal(currentUser);
             actualizarUIConUsuario(currentUser);
             return { success: true, user: currentUser };
         } catch (error) {
             return { success: false, error: traducirErrorFirebase(error.code) };
         }
     } else {
-        // Simulación en modo Demo
-        await simularRetardo(600);
-        const nombreExtraido = email.split("@")[0];
-        const nombreFormateado = nombreExtraido.charAt(0).toUpperCase() + nombreExtraido.slice(1);
-        currentUser = {
-            uid: "demo-" + Date.now(),
-            displayName: nombreFormateado,
-            email: email,
-            photoURL: null,
-            isDemo: true
-        };
+        // Modo Demo / Local
+        await simularRetardo(400);
+        const emailLimpio = email.trim().toLowerCase();
+        const usuarios = obtenerUsuariosRegistrados();
+        const usuarioExistente = usuarios.find(u => u.email.toLowerCase() === emailLimpio);
+
+        if (usuarioExistente) {
+            if (usuarioExistente.password && usuarioExistente.password !== password) {
+                return { success: false, error: "La contraseña ingresada no coincide con este usuario." };
+            }
+            currentUser = { ...usuarioExistente };
+        } else {
+            // Autocreación de perfil personalizado según el correo ingresado
+            const parteNombre = emailLimpio.split("@")[0];
+            const nombreFormateado = parteNombre.charAt(0).toUpperCase() + parteNombre.slice(1);
+            currentUser = {
+                uid: "user-" + Date.now(),
+                displayName: nombreFormateado,
+                email: emailLimpio,
+                password: password,
+                photoURL: null,
+                isDemo: true
+            };
+            guardarUsuarioRegistrado(currentUser);
+        }
+
         guardarSesionLocal(currentUser);
         actualizarUIConUsuario(currentUser);
         return { success: true, user: currentUser, isDemo: true };
@@ -127,26 +188,37 @@ async function registrarConEmail(nombre, email, password) {
         try {
             const userCredential = await auth.createUserWithEmailAndPassword(email, password);
             const user = userCredential.user;
-            // Actualizar nombre de visualización
             await user.updateProfile({
                 displayName: nombre
             });
             currentUser = user;
+            guardarSesionLocal(currentUser);
             actualizarUIConUsuario(currentUser);
             return { success: true, user: currentUser };
         } catch (error) {
             return { success: false, error: traducirErrorFirebase(error.code) };
         }
     } else {
-        // Simulación en modo Demo
-        await simularRetardo(600);
+        // Modo Demo / Local
+        await simularRetardo(400);
+        const emailLimpio = email.trim().toLowerCase();
+        const usuarios = obtenerUsuariosRegistrados();
+        const yaExiste = usuarios.find(u => u.email.toLowerCase() === emailLimpio);
+
+        if (yaExiste) {
+            return { success: false, error: "Este correo electrónico ya está registrado. Inicia sesión con tus credenciales." };
+        }
+
         currentUser = {
-            uid: "demo-" + Date.now(),
+            uid: "user-" + Date.now(),
             displayName: nombre.trim() || "Usuario",
-            email: email,
+            email: emailLimpio,
+            password: password,
             photoURL: null,
             isDemo: true
         };
+
+        guardarUsuarioRegistrado(currentUser);
         guardarSesionLocal(currentUser);
         actualizarUIConUsuario(currentUser);
         return { success: true, user: currentUser, isDemo: true };
@@ -161,24 +233,19 @@ async function loginConGoogle() {
         try {
             const result = await auth.signInWithPopup(googleProvider);
             currentUser = result.user;
+            currentUser.isGoogle = true;
+            guardarSesionLocal(currentUser);
             actualizarUIConUsuario(currentUser);
             return { success: true, user: currentUser };
         } catch (error) {
             return { success: false, error: traducirErrorFirebase(error.code) };
         }
     } else {
-        // Simulación en modo Demo
-        await simularRetardo(500);
-        currentUser = {
-            uid: "demo-google-" + Date.now(),
-            displayName: "Sara García",
-            email: "sara.garcia@gmail.com",
-            photoURL: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
-            isDemo: true
-        };
-        guardarSesionLocal(currentUser);
-        actualizarUIConUsuario(currentUser);
-        return { success: true, user: currentUser, isDemo: true };
+        // En modo local sin Firebase conectado:
+        // Abre el selector de cuenta de Google personalizable
+        cerrarModalAuth();
+        abrirModalGoogleLogin();
+        return { success: false, isCustomGoogle: true };
     }
 }
 
@@ -186,7 +253,7 @@ async function loginConGoogle() {
  * Iniciar sesión como Invitado / Demo
  */
 async function loginInvitado() {
-    await simularRetardo(400);
+    await simularRetardo(300);
     currentUser = {
         uid: "invitado-" + Date.now(),
         displayName: "Invitad@",
@@ -212,10 +279,10 @@ async function recuperarContrasena(email) {
             return { success: false, error: traducirErrorFirebase(error.code) };
         }
     } else {
-        await simularRetardo(500);
+        await simularRetardo(400);
         return { 
             success: true, 
-            message: `(Simulación Demo) Se ha enviado el enlace de recuperación a: ${email}` 
+            message: `(Demostración) Se ha enviado el enlace de recuperación a: ${email}` 
         };
     }
 }
@@ -287,26 +354,39 @@ function traducirErrorFirebase(codigo) {
     }
 }
 
-// Actualiza todos los elementos de la interfaz con los datos del usuario
+// Actualiza todos los elementos de la interfaz con los datos del usuario activo
 function actualizarUIConUsuario(user) {
     const nombreElemento = document.getElementById("headerNombreUsuario");
     const saludoElemento = document.getElementById("saludoPrincipal");
+    const nombrePerfil = document.getElementById("perfilNombre");
     const emailElemento = document.getElementById("perfilEmail");
     const inputNombreConfig = document.getElementById("configNombre");
     const inputEmailConfig = document.getElementById("configEmail");
     const avatarHeader = document.getElementById("headerAvatar");
     const avatarPerfil = document.getElementById("perfilAvatar");
     const btnAuthEstado = document.getElementById("btnAuthEstado");
+    const perfilEstadoBadge = document.getElementById("perfilEstadoBadge");
 
     if (user) {
-        const nombre = user.displayName || (user.email ? user.email.split("@")[0] : "Sara");
+        const nombre = user.displayName || (user.email ? user.email.split("@")[0] : "Usuario");
         const inicial = nombre.charAt(0).toUpperCase();
 
         if (nombreElemento) nombreElemento.textContent = `Hola, ${nombre}`;
         if (saludoElemento) saludoElemento.innerHTML = `¡Hola, ${nombre}! 🌿`;
-        if (emailElemento) emailElemento.textContent = user.email || "sara@ecofood.com";
+        if (nombrePerfil) nombrePerfil.textContent = nombre;
+        if (emailElemento) emailElemento.textContent = user.email || "";
         if (inputNombreConfig) inputNombreConfig.value = nombre;
         if (inputEmailConfig) inputEmailConfig.value = user.email || "";
+
+        if (perfilEstadoBadge) {
+            if (user.isGoogle) {
+                perfilEstadoBadge.className = "badge bg-primary-subtle text-primary border border-primary-subtle mt-2";
+                perfilEstadoBadge.innerHTML = `<i class="bi bi-google"></i> Cuenta de Google Activa`;
+            } else {
+                perfilEstadoBadge.className = "badge bg-success-subtle text-success border border-success-subtle mt-2";
+                perfilEstadoBadge.innerHTML = `<i class="bi bi-shield-check"></i> Cuenta Activa`;
+            }
+        }
 
         // Avatar con imagen o inicial
         [avatarHeader, avatarPerfil].forEach(el => {
@@ -314,25 +394,37 @@ function actualizarUIConUsuario(user) {
                 if (user.photoURL) {
                     el.innerHTML = `<img src="${user.photoURL}" alt="${nombre}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
                 } else {
-                    el.innerHTML = `<span>${inicial}</span>`;
+                    const googleColors = ["#4285F4", "#34A853", "#FBBC05", "#EA4335", "#10B981", "#6366F1"];
+                    const color = user.avatarColor || googleColors[Math.abs(inicial.charCodeAt(0)) % googleColors.length];
+                    el.innerHTML = `<span style="background:${color};color:white;width:100%;height:100%;display:grid;place-items:center;font-weight:700;border-radius:50%;">${inicial}</span>`;
                 }
             }
         });
 
         if (btnAuthEstado) {
+            btnAuthEstado.className = "btn btn-outline-danger px-4 rounded-3 fw-bold";
             btnAuthEstado.innerHTML = `<i class="bi bi-box-arrow-right"></i> Cerrar sesión`;
             btnAuthEstado.onclick = () => confirmarCerrarSesion();
         }
     } else {
         if (nombreElemento) nombreElemento.textContent = "Iniciar sesión";
-        if (saludoElemento) saludoElemento.innerHTML = "¡Bienvenid@! 🌿";
+        if (saludoElemento) saludoElemento.innerHTML = "¡Bienvenid@ a EcoFood! 🌿";
+        if (nombrePerfil) nombrePerfil.textContent = "Sin sesión activa";
         if (emailElemento) emailElemento.textContent = "Inicia sesión para sincronizar tus alimentos";
-        
+        if (inputNombreConfig) inputNombreConfig.value = "";
+        if (inputEmailConfig) inputEmailConfig.value = "";
+
+        if (perfilEstadoBadge) {
+            perfilEstadoBadge.className = "badge bg-secondary-subtle text-secondary border border-secondary-subtle mt-2";
+            perfilEstadoBadge.innerHTML = `<i class="bi bi-person-x"></i> Sin sesión activa`;
+        }
+
         [avatarHeader, avatarPerfil].forEach(el => {
             if (el) el.innerHTML = `<i class="bi bi-person"></i>`;
         });
 
         if (btnAuthEstado) {
+            btnAuthEstado.className = "btn btn-eco-primary px-4 rounded-3 fw-bold";
             btnAuthEstado.innerHTML = `<i class="bi bi-box-arrow-in-right"></i> Iniciar sesión`;
             btnAuthEstado.onclick = () => abrirModalAuth("login");
         }

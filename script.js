@@ -569,7 +569,20 @@ function verRecetaModal(id) {
 function abrirModalAuth(tab = 'login') {
     cambiarTabAuth(tab);
     limpiarAlertaAuth();
-    const modal = new bootstrap.Modal(document.getElementById("modalAuth"));
+    
+    // Limpiar campos de texto para evitar credenciales residuales
+    const loginEmail = document.getElementById("loginEmail");
+    const loginPass = document.getElementById("loginPassword");
+    const regNombre = document.getElementById("regNombre");
+    const regEmail = document.getElementById("regEmail");
+    const regPass = document.getElementById("regPassword");
+    if (loginEmail) loginEmail.value = "";
+    if (loginPass) loginPass.value = "";
+    if (regNombre) regNombre.value = "";
+    if (regEmail) regEmail.value = "";
+    if (regPass) regPass.value = "";
+
+    const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById("modalAuth"));
     modal.show();
 }
 
@@ -666,12 +679,113 @@ async function manejarRegistroEmail(e) {
 async function manejarLoginGoogle() {
     limpiarAlertaAuth();
     const res = await loginConGoogle();
-    if (res.success) {
+    if (res && res.success) {
         cerrarModalAuth();
         mostrarAlertaToast(`¡Sesión iniciada con Google! Hola, ${res.user.displayName} 🌿`);
-    } else {
+    } else if (res && res.error) {
         mostrarAlertaAuth(res.error, "error");
     }
+}
+
+// ---------------------------------------------------------
+// GESTIÓN DEL SELECTOR DE GOOGLE PERSONALIZADO
+// ---------------------------------------------------------
+
+function abrirModalGoogleLogin() {
+    renderizarCuentasGoogleGuardadas();
+    const modalEl = document.getElementById("modalGoogleLogin");
+    if (modalEl) {
+        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.show();
+    }
+}
+
+function cerrarModalGoogleLogin() {
+    const modalEl = document.getElementById("modalGoogleLogin");
+    if (modalEl) {
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+    }
+}
+
+function renderizarCuentasGoogleGuardadas() {
+    const contenedor = document.getElementById("contenedorCuentasGoogle");
+    const lista = document.getElementById("listaCuentasGoogle");
+    if (!contenedor || !lista) return;
+
+    const cuentas = typeof obtenerCuentasGoogle === "function" ? obtenerCuentasGoogle() : [];
+    if (cuentas.length === 0) {
+        contenedor.style.display = "none";
+        lista.innerHTML = "";
+        return;
+    }
+
+    contenedor.style.display = "block";
+    const googleColors = ["#4285F4", "#34A853", "#FBBC05", "#EA4335"];
+    lista.innerHTML = cuentas.map(cta => {
+        const inicial = (cta.displayName || cta.email || "G").charAt(0).toUpperCase();
+        const color = cta.avatarColor || googleColors[Math.abs(inicial.charCodeAt(0)) % googleColors.length];
+        return `
+            <button type="button" class="google-account-card" onclick="iniciarConCuentaGoogleGuardada('${cta.email}')">
+                <div class="google-account-avatar" style="background:${color};">
+                    ${cta.photoURL ? `<img src="${cta.photoURL}" alt="${cta.displayName}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">` : inicial}
+                </div>
+                <div class="google-account-info">
+                    <div class="google-account-name">${cta.displayName}</div>
+                    <div class="google-account-email">${cta.email}</div>
+                </div>
+                <i class="bi bi-chevron-right text-muted"></i>
+            </button>
+        `;
+    }).join("");
+}
+
+function iniciarConCuentaGoogleGuardada(email) {
+    const cuentas = typeof obtenerCuentasGoogle === "function" ? obtenerCuentasGoogle() : [];
+    const cta = cuentas.find(c => c.email.toLowerCase() === email.toLowerCase());
+    if (cta) {
+        currentUser = { ...cta, isGoogle: true, isDemo: true };
+        guardarSesionLocal(currentUser);
+        actualizarUIConUsuario(currentUser);
+        cerrarModalGoogleLogin();
+        mostrarAlertaToast(`¡Bienvenid@, ${currentUser.displayName}! Sesión de Google iniciada 🌿`);
+    }
+}
+
+function manejarAccesoGoogleForm(e) {
+    e.preventDefault();
+    const nombre = document.getElementById("googleInputNombre").value.trim();
+    const email = document.getElementById("googleInputEmail").value.trim().toLowerCase();
+
+    if (!nombre || !email) return;
+
+    const googleColors = ["#4285F4", "#34A853", "#FBBC05", "#EA4335"];
+    const inicial = nombre.charAt(0).toUpperCase();
+    const color = googleColors[Math.abs(inicial.charCodeAt(0)) % googleColors.length];
+
+    const nuevoGoogleUser = {
+        uid: "google-" + Date.now(),
+        displayName: nombre,
+        email: email,
+        isGoogle: true,
+        isDemo: true,
+        avatarColor: color,
+        photoURL: null
+    };
+
+    if (typeof guardarCuentaGoogle === "function") {
+        guardarCuentaGoogle(nuevoGoogleUser);
+    }
+    currentUser = nuevoGoogleUser;
+    guardarSesionLocal(currentUser);
+    actualizarUIConUsuario(currentUser);
+
+    // Limpiar campos
+    document.getElementById("googleInputNombre").value = "";
+    document.getElementById("googleInputEmail").value = "";
+
+    cerrarModalGoogleLogin();
+    mostrarAlertaToast(`¡Sesión iniciada con tu cuenta de Google! Bienvenido, ${nombre} 🌿`);
 }
 
 async function manejarModoInvitado() {
@@ -711,18 +825,28 @@ function abrirMenuOPerfil() {
 async function confirmarCerrarSesion() {
     if (confirm("¿Deseas cerrar tu sesión actual en EcoFood?")) {
         await cerrarSesion();
-        mostrarAlertaToast("Has cerrado tu sesión.");
-        abrirModalAuth('login');
+        mostrarAlertaToast("Has cerrado tu sesión. Ahora puedes ingresar con otra cuenta.");
     }
 }
 
 function guardarConfiguracion() {
     const nuevoNombre = document.getElementById("configNombre").value.trim();
-    if (nuevoNombre && currentUser) {
+    if (!currentUser) {
+        mostrarAlertaToast("Inicia sesión para guardar tus preferencias.");
+        abrirModalAuth('login');
+        return;
+    }
+    if (nuevoNombre) {
         currentUser.displayName = nuevoNombre;
         guardarSesionLocal(currentUser);
+        if (typeof guardarUsuarioRegistrado === "function" && currentUser.email) {
+            guardarUsuarioRegistrado(currentUser);
+        }
+        if (typeof guardarCuentaGoogle === "function" && currentUser.isGoogle) {
+            guardarCuentaGoogle(currentUser);
+        }
         actualizarUIConUsuario(currentUser);
-        alert("¡Preferencias guardadas correctamente! 💚");
+        mostrarAlertaToast("¡Preferencias guardadas correctamente! 💚");
     }
 }
 

@@ -98,7 +98,7 @@
 
     <!-- =========================================================
          CONTENIDO PRINCIPAL
-         ========================================================= -->
+         ========================================================= -->                     
     <main class="main-content">
 
         <!-- BARRA SUPERIOR (HEADER) -->
@@ -130,11 +130,11 @@
                     <span class="notification-dot"></span>
                 </button>
 
-                <div class="user-profile-pill" onclick="abrirMenuOPerfil()">
+                <div class="user-profile-pill" onclick="abrirMenuOPerfil()" title="Mi cuenta y perfil">
                     <div class="user-avatar-circle" id="headerAvatar">
-                        <span>S</span>
+                        <i class="bi bi-person"></i>
                     </div>
-                    <span id="headerNombreUsuario">Hola, Sara</span>
+                    <span id="headerNombreUsuario">Iniciar sesión</span>
                     <i class="bi bi-chevron-down"></i>
                 </div>
             </div>
@@ -149,7 +149,7 @@
             
             <div class="section-header">
                 <div class="section-greeting">
-                    <h1 id="saludoPrincipal">¡Hola, Sara! 🌿</h1>
+                    <h1 id="saludoPrincipal">¡Bienvenid@ a EcoFood! 🌿</h1>
                     <p>¿Qué vamos a ahorrar hoy?</p>
                 </div>
                 
@@ -370,7 +370,7 @@
              VISTA 5: RECORDATORIOS
              ========================================================= -->
         <section id="recordatorios" class="app-view">
-            
+            S
             <div class="section-header">
                 <div class="section-greeting">
                     <h1>Recordatorios 🔔</h1>
@@ -531,13 +531,13 @@
                 
                 <div class="profile-card-header">
                     <div class="profile-big-avatar" id="perfilAvatar">
-                        <span>S</span>
+                        <i class="bi bi-person"></i>
                     </div>
                     <div>
-                        <h3 class="fw-bold mb-1" id="perfilNombre">Sara</h3>
-                        <p class="text-muted mb-0" id="perfilEmail">sara@ecofood.com</p>
-                        <span class="badge bg-success-subtle text-success border border-success-subtle mt-2" id="perfilEstadoBadge">
-                            <i class="bi bi-shield-check"></i> Cuenta Activa
+                        <h3 class="fw-bold mb-1" id="perfilNombre">Sin sesión activa</h3>
+                        <p class="text-muted mb-0" id="perfilEmail">Inicia sesión para sincronizar tus datos</p>
+                        <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle mt-2" id="perfilEstadoBadge">
+                            <i class="bi bi-person-x"></i> Sesión no iniciada
                         </span>
                     </div>
                 </div>
@@ -546,14 +546,14 @@
                     <div class="col-md-6">
                         <div class="eco-form-group">
                             <label>Nombre completo</label>
-                            <input type="text" id="configNombre" class="eco-form-control" value="Sara">
+                            <input type="text" id="configNombre" class="eco-form-control" placeholder="Ingresa tu nombre">
                         </div>
                     </div>
                     
                     <div class="col-md-6">
                         <div class="eco-form-group">
                             <label>Correo electrónico</label>
-                            <input type="email" id="configEmail" class="eco-form-control" value="sara@ecofood.com" readonly>
+                            <input type="email" id="configEmail" class="eco-form-control" placeholder="tu.correo@ejemplo.com" readonly>
                         </div>
                     </div>
 
@@ -891,13 +891,13 @@
                 <form id="formLogin" onsubmit="manejarLoginEmail(event)">
                     <div class="eco-form-group">
                         <label>Correo electrónico</label>
-                        <input type="email" id="loginEmail" class="eco-form-control" placeholder="nombre@ejemplo.com" required value="sara@ecofood.com">
+                        <input type="email" id="loginEmail" class="eco-form-control" placeholder="nombre@ejemplo.com" required>
                     </div>
 
                     <div class="eco-form-group">
                         <label>Contraseña</label>
                         <div class="position-relative">
-                            <input type="password" id="loginPassword" class="eco-form-control" placeholder="••••••••" required value="123456">
+                            <input type="password" id="loginPassword" class="eco-form-control" placeholder="••••••••" required>
                             <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3 text-muted" style="cursor:pointer;" onclick="togglePasswordVis('loginPassword', this)"></i>
                         </div>
                     </div>
@@ -919,7 +919,7 @@
                 <form id="formRegister" style="display: none;" onsubmit="manejarRegistroEmail(event)">
                     <div class="eco-form-group">
                         <label>Nombre completo</label>
-                        <input type="text" id="regNombre" class="eco-form-control" placeholder="Ej. Sara García" required>
+                        <input type="text" id="regNombre" class="eco-form-control" placeholder="Ej. Juan Pérez" required>
                     </div>
 
                     <div class="eco-form-group">
@@ -968,6 +968,59 @@
 
             </div>
 
+        </div>
+    </div>
+</div>
+
+
+<!-- =========================================================
+     MODAL DE INICIO DE SESIÓN CON GOOGLE (PERSONALIZABLE)
+     ========================================================= -->
+<div class="modal fade" id="modalGoogleLogin" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+        <div class="modal-content eco-modal-content border-0 shadow-lg" style="border-radius: 24px; overflow: hidden;">
+            <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                    </svg>
+                    <h5 class="fw-bold m-0" style="color: #202124;">Acceder con Google</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            
+            <div class="modal-body p-4">
+                <p class="text-muted small mb-3">
+                    Ingresa con tu propia cuenta de Google o elige una guardada en este dispositivo para personalizar tu EcoFood.
+                </p>
+
+                <!-- Cuentas usadas anteriormente en Google -->
+                <div id="contenedorCuentasGoogle" class="mb-3" style="display: none;">
+                    <label class="fw-bold small text-muted text-uppercase mb-2" style="font-size: 11px;">Cuentas recientes</label>
+                    <div id="listaCuentasGoogle" class="d-flex flex-column gap-2 mb-3"></div>
+                    <div class="auth-divider my-2"><span>o ingresa otra cuenta</span></div>
+                </div>
+
+                <!-- Formulario de acceso con Google -->
+                <form id="formGoogleAcceso" onsubmit="manejarAccesoGoogleForm(event)">
+                    <div class="eco-form-group mb-3">
+                        <label>Tu nombre completo</label>
+                        <input type="text" id="googleInputNombre" class="eco-form-control" placeholder="Ej. Juan Pérez" required>
+                    </div>
+
+                    <div class="eco-form-group mb-4">
+                        <label>Tu correo de Google (Gmail)</label>
+                        <input type="email" id="googleInputEmail" class="eco-form-control" placeholder="juan.perez@gmail.com" required>
+                    </div>
+
+                    <button type="submit" class="btn-eco-primary w-100 justify-content-center py-2 fw-bold">
+                        <i class="bi bi-google"></i> Continuar como este usuario
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
