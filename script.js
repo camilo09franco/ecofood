@@ -9,79 +9,9 @@ let alimentos = [
         nombre: "Leche",
         categoria: "Lácteos",
         cantidad: "1 litro",
-        fechaVencimiento: "2026-05-15",
+        fechaVencimiento: "2026-09-15",
         diasRestantes: 2,
         emoji: "🥛",
-        foto: null
-    },
-    {
-        id: 2,
-        nombre: "Yogur natural",
-        categoria: "Lácteos",
-        cantidad: "200 g",
-        fechaVencimiento: "2026-05-16",
-        diasRestantes: 3,
-        emoji: "🥛",
-        foto: null
-    },
-    {
-        id: 3,
-        nombre: "Fresas",
-        categoria: "Frutas",
-        cantidad: "250 g",
-        fechaVencimiento: "2026-05-17",
-        diasRestantes: 4,
-        emoji: "🍓",
-        foto: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=400&auto=format&fit=crop&q=80"
-    },
-    {
-        id: 4,
-        nombre: "Tomate",
-        categoria: "Verduras",
-        cantidad: "500 g",
-        fechaVencimiento: "2026-05-18",
-        diasRestantes: 5,
-        emoji: "🍅",
-        foto: null
-    },
-    {
-        id: 5,
-        nombre: "Zanahoria",
-        categoria: "Verduras",
-        cantidad: "1 kg",
-        fechaVencimiento: "2026-05-20",
-        diasRestantes: 7,
-        emoji: "🥕",
-        foto: null
-    },
-    {
-        id: 6,
-        nombre: "Pechuga de pollo",
-        categoria: "Carnes",
-        cantidad: "500 g",
-        fechaVencimiento: "2026-05-16",
-        diasRestantes: 3,
-        emoji: "🍗",
-        foto: null
-    },
-    {
-        id: 7,
-        nombre: "Lechuga",
-        categoria: "Verduras",
-        cantidad: "1 unidad",
-        fechaVencimiento: "2026-05-18",
-        diasRestantes: 5,
-        emoji: "🥬",
-        foto: null
-    },
-    {
-        id: 8,
-        nombre: "Manzana",
-        categoria: "Frutas",
-        cantidad: "4 unidades",
-        fechaVencimiento: "2026-05-22",
-        diasRestantes: 9,
-        emoji: "🍎",
         foto: null
     }
 ];

@@ -44,9 +44,9 @@
         
         <div class="sidebar-logo">
             <div class="logo-leaf-icon">
-                <i class="bi bi-tree-fill"></i>
+               <img src="img/logo.png"style="width: 60px; margin-top: -8px;">
             </div>
-            <div>
+            <div style="margin-left: 10px;">
                 <h2>EcoFood</h2>
                 <p>Menos desperdicio, más ahorro.</p>
             </div>
@@ -763,7 +763,14 @@
 
                 <div class="eco-form-group">
                     <label>Cantidad</label>
-                    <input type="text" id="cantidadAlimento" class="eco-form-control" placeholder="Ej. 250 g, 1 litro, 3 unidades">
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="cantidadAlimento" class="eco-form-control" placeholder="Ej. 250, 1, 3" style="flex: 2;">
+                        <select id="categoriaAlimento" class="eco-form-control" style="flex: 1;">
+                            <option value="kilos">kg</option>
+                            <option value="gramos">gr</option>
+                            <option value="unidades">unidades</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="eco-form-group">
