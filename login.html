@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -277,6 +277,9 @@
         const title = document.getElementById("authTitle");
         const subtitle = document.getElementById("authSubtitle");
 
+        const successCard = document.getElementById("recoverSuccessCard");
+        if (successCard) successCard.style.display = "none";
+
         if (tab === 'login') {
             tabLogin.classList.add("active");
             tabRegister.classList.remove("active");
@@ -298,6 +301,8 @@
 
     function mostrarRecuperar() {
         limpiarAlerta();
+        const successCard = document.getElementById("recoverSuccessCard");
+        if (successCard) successCard.style.display = "none";
         document.getElementById("formLogin").style.display = "none";
         document.getElementById("formRegister").style.display = "none";
         document.getElementById("formRecover").style.display = "block";
@@ -451,15 +456,133 @@
 
     async function ejecutarRecuperar(e) {
         e.preventDefault();
-        const email = document.getElementById("recoverEmail").value;
+        limpiarAlerta();
+        const email = document.getElementById("recoverEmail").value.trim();
+        const btn = document.getElementById("btnSubmitRecover");
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Enviando...`;
+        }
+
         const res = await recuperarContrasena(email);
+
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = `<i class="bi bi-envelope"></i> Enviar correo de recuperaciÃ³n`;
+        }
+
         if (res.success) {
-            mostrarAlerta(res.message, "success");
+            document.getElementById("formRecover").style.display = "none";
+            const successCard = document.getElementById("recoverSuccessCard");
+            const emailSpan = document.getElementById("recoverEmailSuccess");
+            const previewEmailSpan = document.getElementById("previewDestinatarioEmail");
+            if (emailSpan) emailSpan.textContent = email;
+            if (previewEmailSpan) previewEmailSpan.textContent = email;
+            if (successCard) successCard.style.display = "block";
+            document.getElementById("authTitle").textContent = "Â¡Correo Enviado! ðŸ“¬";
+            document.getElementById("authSubtitle").textContent = "Revisa tu bandeja de entrada para continuar.";
         } else {
-            mostrarAlerta(res.error, "error");
+            mostrarAlerta(res.error || "OcurriÃ³ un error al enviar el correo.", "error");
         }
     }
+
+    function abrirPreviewEmailModal() {
+        const modalEl = document.getElementById("modalPreviewEmail");
+        if (modalEl) {
+            const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.show();
+        }
+    }
+
+    function volverDeRecuperacion() {
+        const successCard = document.getElementById("recoverSuccessCard");
+        if (successCard) successCard.style.display = "none";
+        cambiarTab('login');
+    }
 </script>
+
+<!-- =========================================================
+     MODAL DE VISTA PREVIA DEL CORREO CORPORATIVO DE ECOFOOD
+     ========================================================= -->
+<div class="modal fade" id="modalPreviewEmail" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 560px;">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 24px; overflow: hidden;">
+            <div class="modal-header border-0 pb-0 pt-3 px-4 d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill small">
+                        <i class="bi bi-envelope-paper"></i> Vista Previa del Email
+                    </span>
+                    <span class="small text-muted">EcoFood Security</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <div class="modal-body p-3 p-md-4">
+                <div class="email-preview-window">
+                    <div class="email-preview-bar">
+                        <div class="email-preview-row">
+                            <strong>De:</strong>
+                            <span>EcoFood Seguridad &lt;seguridad@ecofood-43441.firebaseapp.com&gt;</span>
+                        </div>
+                        <div class="email-preview-row">
+                            <strong>Para:</strong>
+                            <span id="previewDestinatarioEmail">tu.correo@ejemplo.com</span>
+                        </div>
+                        <div class="email-preview-row">
+                            <strong>Asunto:</strong>
+                            <span class="fw-bold text-dark">ðŸ”‘ Restablece tu contraseÃ±a de EcoFood</span>
+                        </div>
+                    </div>
+
+                    <div class="email-body-canvas">
+                        <div class="email-card-content">
+                            <!-- CABECERA CON LOGO OFICIAL -->
+                            <div class="email-header-brand">
+                                <img src="img/logo.png" alt="EcoFood Logo">
+                                <h3>EcoFood</h3>
+                                <p>Menos desperdicio, mÃ¡s ahorro para tu hogar</p>
+                            </div>
+
+                            <!-- CONTENIDO DEL MENSAJE -->
+                            <div class="email-main-message">
+                                <h5 class="fw-bold mb-3" style="color: #1E293B;">Â¡Hola! ðŸ‘‹ðŸŒ¿</h5>
+                                <p>
+                                    Recibimos una solicitud para restablecer la contraseÃ±a de tu cuenta personal en <b>EcoFood</b>.
+                                </p>
+                                <p>
+                                    Para elegir una nueva contraseÃ±a y volver a acceder a tu despensa inteligente, haz clic en el siguiente botÃ³n seguro:
+                                </p>
+
+                                <div class="text-center my-4">
+                                    <a href="javascript:void(0)" class="btn-email-action">
+                                        <i class="bi bi-shield-lock me-1"></i> Restablecer mi contraseÃ±a
+                                    </a>
+                                </div>
+
+                                <div class="email-security-box">
+                                    <div class="fw-bold mb-1 text-dark"><i class="bi bi-shield-check text-success"></i> InformaciÃ³n de seguridad:</div>
+                                    <div>Este enlace expira en 60 minutos. Si tÃº no solicitaste este cambio, no te preocupes: puedes ignorar este correo y tu cuenta continuarÃ¡ totalmente protegida.</div>
+                                </div>
+                            </div>
+
+                            <!-- PIE DE PÃGINA -->
+                            <div class="email-footer-legal">
+                                <div class="mb-1"><strong>EcoFood Technologies Â© 2026</strong></div>
+                                <div>Cuidando tu economÃ­a familiar y reduciendo el desperdicio en el planeta ðŸŒŽ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-sm btn-eco-secondary px-3" data-bs-dismiss="modal">
+                        <i class="bi bi-check2"></i> Cerrar vista previa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

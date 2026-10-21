@@ -1,4 +1,4 @@
-// =========================================================
+﻿// =========================================================
 // ECOFOOD - CONFIGURACIÓN E INTEGRACIÓN DE FIREBASE AUTH
 // =========================================================
 
@@ -460,6 +460,14 @@ function actualizarUIConUsuario(user) {
             btnAuthEstado.innerHTML = `<i class="bi bi-box-arrow-in-right"></i> Iniciar sesión`;
             btnAuthEstado.onclick = () => abrirModalAuth("login");
         }
+    }
+    const btnQuitarFoto = document.getElementById("btnQuitarFotoPerfil");
+    if (btnQuitarFoto) {
+        btnQuitarFoto.style.display = (user && user.photoURL) ? "inline-block" : "none";
+    }
+
+    if (typeof window.sincronizarDatosUsuario === "function") {
+        window.sincronizarDatosUsuario(user);
     }
 }
 
