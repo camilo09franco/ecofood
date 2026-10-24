@@ -30,7 +30,7 @@ const recetas = [
         tiempo: "20 min",
         categoria: "Desayunos",
         emoji: "🥚",
-        foto: "https://images.unsplash.com/photo-1584947897667-8898b671a5c6?w=400&auto=format&fit=crop&q=80",
+         foto: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=400&auto=format&fit=crop&q=80",
         ingredientes: ["2 huevos", "1/2 zanahoria rallada", "Espinacas o lechuga picada", "1 tomate en cubitos", "Sal y pimienta"],
         ingredientesClave: ["verduras", "zanahoria", "lechuga", "tomate", "espinaca", "huevos"],
         preparacion: "Bate los huevos con sal y pimienta. Saltea las verduras 3 minutos en sartón con un poco de aceite de oliva. Vierte los huevos batidos y cocina a fuego medio 3 minutos por lado hasta dorar."
