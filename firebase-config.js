@@ -1,4 +1,4 @@
-﻿// =========================================================
+// =========================================================
 // ECOFOOD - CONFIGURACIÓN E INTEGRACIÓN DE FIREBASE AUTH
 // =========================================================
 
@@ -39,6 +39,8 @@ try {
             firebase.initializeApp(firebaseConfig);
             auth = firebase.auth();
             googleProvider = new firebase.auth.GoogleAuthProvider();
+            // Siempre mostrar el selector de cuenta, aunque ya haya una sesión activa
+            googleProvider.setCustomParameters({ prompt: 'select_account' });
             isFirebaseReady = true;
             console.log("🌲 Firebase Auth inicializado con éxito.");
         } else {
@@ -57,26 +59,28 @@ const DEMO_STORAGE_KEY = "ecofood_user_session";
 const REGISTERED_USERS_KEY = "ecofood_registered_users";
 const GOOGLE_ACCOUNTS_KEY = "ecofood_google_accounts";
 
-// Cargar usuario guardado previamente en demo
+// Cargar sesión activa (solo existe si la pestaña sigue abierta)
 function cargarSesionLocal() {
     try {
-        const stored = localStorage.getItem(DEMO_STORAGE_KEY);
+        // sessionStorage se borra al cerrar — siempre pide login al reabrir
+        const stored = sessionStorage.getItem(DEMO_STORAGE_KEY);
         if (stored) {
             return JSON.parse(stored);
         }
     } catch (e) {
         console.error("Error leyendo sesión local:", e);
     }
-    // Si no hay sesión iniciada, devolvemos null para que la app no imponga ningún nombre por defecto
     return null;
 }
 
-// Guardar sesión local
+// Guardar sesión local (sessionStorage: se borra al cerrar el navegador/pestaña)
 function guardarSesionLocal(user) {
     if (user) {
         localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(user));
+        sessionStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(user));
     } else {
         localStorage.removeItem(DEMO_STORAGE_KEY);
+        sessionStorage.removeItem(DEMO_STORAGE_KEY);
     }
 }
 
@@ -328,7 +332,7 @@ function inicializarAuthListener() {
                 guardarSesionLocal(currentUser);
                 actualizarUIConUsuario(user);
                 if (esPaginaLogin) {
-                    window.location.replace("Index.html");
+                    window.location.replace("index.html");
                 }
             } else {
                 currentUser = null;
@@ -346,7 +350,7 @@ function inicializarAuthListener() {
             currentUser = sesionGuardada;
             actualizarUIConUsuario(currentUser);
             if (esPaginaLogin) {
-                window.location.replace("Index.html");
+                window.location.replace("index.html");
             }
         } else {
             currentUser = null;

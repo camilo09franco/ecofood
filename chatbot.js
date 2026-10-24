@@ -15,7 +15,8 @@
    es aceptable solo para proyectos personales / demos. Para
    producción usa un backend o un Worker de Cloudflare.
    ============================================================= */
-const GEMINI_API_KEY = "https://red-block-9395.andressantiago-garcia18.workers.dev/";
+const GEMINI_API_KEY = "";
+const GEMINI_WORKER_URL = "https://red-block-9395.andressantiago-garcia18.workers.dev/";
 const GEMINI_MODELO  = "gemini-1.5-flash";
 
 // ── Bootstrap ────────────────────────────────────────────────
@@ -102,7 +103,7 @@ const GEMINI_MODELO  = "gemini-1.5-flash";
 
   /* ── Gemini ──────────────────────────────────────────────── */
   async function preguntarGemini(mensaje) {
-    if (!GEMINI_API_KEY) throw new Error("Sin API Key");
+    if (!GEMINI_API_KEY && !GEMINI_WORKER_URL) throw new Error("Sin API Key ni Worker URL");
 
     const contexto = KB.temas
       .map(t => `- ${t.preguntas[0]}: ${t.respuesta}`)
@@ -120,8 +121,13 @@ Si no sabes la respuesta o no tiene que ver con la app, dilo con amabilidad y su
     }));
     contents.push({ role: "user", parts: [{ text: mensaje }] });
 
+    // Usa el Worker URL directamente si no hay API key propia
+    const fetchURL = GEMINI_API_KEY
+      ? `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODELO}:generateContent?key=${GEMINI_API_KEY}`
+      : GEMINI_WORKER_URL;
+
     const r = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODELO}:generateContent?key=${GEMINI_API_KEY}`,
+      fetchURL,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -247,7 +253,7 @@ Si no sabes la respuesta o no tiene que ver con la app, dilo con amabilidad y su
       return;
     }
 
-    if (GEMINI_API_KEY) {
+    if (GEMINI_API_KEY || GEMINI_WORKER_URL) {
       try {
         const resp = await preguntarGemini(texto);
         cargando.remove();
@@ -292,4 +298,3 @@ Si no sabes la respuesta o no tiene que ver con la app, dilo con amabilidad y su
   };
 
 })();
-g4t 

@@ -1,5 +1,5 @@
 // =========================================================
-// ECOFOOD - LÓGICA DE APLICACIÓN E INTERACTIVIDAD PERSONAL
+// ECOFOOD - LóGICA DE APLICACIóN E INTERACTIVIDAD PERSONAL
 // =========================================================
 
 // Variables de estado del usuario activo
@@ -10,7 +10,7 @@ let usuarioStats = {
     alimentosAprovechados: 0,
     desperdicioEvitadoKg: 0,
     rachaDias: 1,
-    historialSemanal: [0, 0, 0, 0, 0, 0, 0] // Lun, Mar, Mié, Jue, Vie, Sáb, Dom
+    historialSemanal: [0, 0, 0, 0, 0, 0, 0] // Lun, Mar, Mió, Jue, Vie, Sób, Dom
 };
 let usuarioConfig = {
     moneda: "COP",
@@ -29,11 +29,11 @@ const recetas = [
         subtitulo: "Con lo que tienes en casa",
         tiempo: "20 min",
         categoria: "Desayunos",
-        emoji: "🍳",
+        emoji: "🥚",
         foto: "https://images.unsplash.com/photo-1584947897667-8898b671a5c6?w=400&auto=format&fit=crop&q=80",
         ingredientes: ["2 huevos", "1/2 zanahoria rallada", "Espinacas o lechuga picada", "1 tomate en cubitos", "Sal y pimienta"],
         ingredientesClave: ["verduras", "zanahoria", "lechuga", "tomate", "espinaca", "huevos"],
-        preparacion: "Bate los huevos con sal y pimienta. Saltea las verduras 3 minutos en sartén con un poco de aceite de oliva. Vierte los huevos batidos y cocina a fuego medio 3 minutos por lado hasta dorar."
+        preparacion: "Bate los huevos con sal y pimienta. Saltea las verduras 3 minutos en sartón con un poco de aceite de oliva. Vierte los huevos batidos y cocina a fuego medio 3 minutos por lado hasta dorar."
     },
     {
         id: 2,
@@ -41,11 +41,11 @@ const recetas = [
         subtitulo: "Aprovecha frutas antes que venzan",
         tiempo: "10 min",
         categoria: "Desayunos",
-        emoji: "🍓",
+        emoji: "🥚",
         foto: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&auto=format&fit=crop&q=80",
         ingredientes: ["1 taza de fresas o fruta madura", "1 vaso de leche o yogur", "1 cucharada de miel", "Hielo al gusto"],
         ingredientesClave: ["fresa", "fresas", "frutas", "fruta", "leche", "yogur"],
-        preparacion: "Lava bien las frutas, colócalas en la licuadora con la leche o yogur y la miel. Licúa por 1 minuto hasta obtener una mezcla suave y cremosa."
+        preparacion: "Lava bien las frutas, colócalas en la licuadora con la leche o yogur y la miel. Licóa por 1 minuto hasta obtener una mezcla suave y cremosa."
     },
     {
         id: 3,
@@ -57,7 +57,7 @@ const recetas = [
         foto: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&auto=format&fit=crop&q=80",
         ingredientes: ["Lechuga o espinaca troceada", "2 tomates en rodajas", "Queso en cubos", "Aceite de oliva y limón"],
         ingredientesClave: ["lechuga", "tomates", "tomate", "queso", "verduras"],
-        preparacion: "Mezcla la lechuga con los tomates y el queso. Adereza con aceite de oliva, jugo de limón, sal y una pizca de orégano."
+        preparacion: "Mezcla la lechuga con los tomates y el queso. Adereza con aceite de oliva, jugo de limón, sal y una pizca de orógano."
     },
     {
         id: 4,
@@ -65,7 +65,7 @@ const recetas = [
         subtitulo: "Fácil y lleno de sabor",
         tiempo: "25 min",
         categoria: "Cenas",
-        emoji: "🥘",
+        emoji: "🍳",
         foto: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&auto=format&fit=crop&q=80",
         ingredientes: ["Zanahorias en bastones", "Pechuga de pollo en tiras", "Cebolla", "Salsa de soja"],
         ingredientesClave: ["pollo", "carnes", "carne", "verduras", "zanahoria", "cebolla"],
@@ -74,7 +74,7 @@ const recetas = [
 ];
 
 // =========================================================
-// GESTIÓN DE ALMACENAMIENTO PERSONAL POR USUARIO
+// GESTIóN DE ALMACENAMIENTO PERSONAL POR USUARIO
 // =========================================================
 
 function obtenerUsuarioClave() {
@@ -139,7 +139,7 @@ function cargarDatosUsuario() {
 
     if (rawAlim === null) {
         // =========================================================
-        // USUARIO NUEVO: INICIALIZACIÓN CON EJEMPLOS EDUCATIVOS
+        // USUARIO NUEVO: INICIALIZACIóN CON EJEMPLOS EDUCATIVOS
         // =========================================================
         alimentos = [
             {
@@ -181,14 +181,14 @@ function cargarDatosUsuario() {
             {
                 id: 201,
                 emoji: "🥛",
-                texto: "Ejemplo: La leche vence en 2 días, ¿preparamos un batido?",
+                texto: "Ejemplo: La leche vence en 2 días, ópreparamos un batido?",
                 tiempo: "Para hoy o mañana",
                 completado: false,
                 esEjemplo: true
             },
             {
                 id: 202,
-                emoji: "🥬",
+                emoji: "🗓️",
                 texto: "Ejemplo: Revisar verduras en la gaveta baja",
                 tiempo: "En 3 días",
                 completado: false,
@@ -266,7 +266,7 @@ window.sincronizarDatosUsuario = function(user) {
 };
 
 // =========================================================
-// INICIALIZACIÓN
+// INICIALIZACIóN
 // =========================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -291,13 +291,13 @@ function formatearDinero(monto) {
     const num = Math.round(monto || 0);
     const moneda = (usuarioConfig && usuarioConfig.moneda) ? usuarioConfig.moneda : "COP";
     if (moneda === "USD") return `$ ${num.toLocaleString('en-US')} USD`;
-    if (moneda === "EUR") return `€ ${num.toLocaleString('es-ES')} EUR`;
+    if (moneda === "EUR") return `ó ${num.toLocaleString('es-ES')} EUR`;
     if (moneda === "MXN") return `$ ${num.toLocaleString('es-MX')} MXN`;
     return `$ ${num.toLocaleString('es-CO')}`;
 }
 
 // =========================================================
-// GUÍA DE BIENVENIDA Y EJEMPLOS PARA USUARIOS NUEVOS
+// GUóA DE BIENVENIDA Y EJEMPLOS PARA USUARIOS NUEVOS
 // =========================================================
 
 function actualizarVisibilidadGuia() {
@@ -318,7 +318,7 @@ function cerrarGuiaBienvenida() {
     const userKey = obtenerUsuarioClave();
     localStorage.setItem(`ecofood_onboarding_${userKey}`, "true");
     actualizarVisibilidadGuia();
-    mostrarAlertaToast("¡Guía completada! Tu despensa está lista para ti 🌿", "success");
+    mostrarAlertaToast("¡Guía completada! Tu despensa estó lista para ti 🌿", "success");
 }
 
 function reabrirGuiaBienvenida() {
@@ -329,7 +329,7 @@ function reabrirGuiaBienvenida() {
 }
 
 function eliminarAlimentosEjemplo() {
-    if (confirm("¿Deseas eliminar los alimentos de ejemplo y empezar tu despensa desde cero?")) {
+    if (confirm("¡Deseas eliminar los alimentos de ejemplo y empezar tu despensa desde cero?")) {
         alimentos = alimentos.filter(a => !a.esEjemplo);
         recordatorios = recordatorios.filter(r => !r.esEjemplo);
         guardarAlimentosUsuario();
@@ -340,7 +340,7 @@ function eliminarAlimentosEjemplo() {
 }
 
 // =========================================================
-// GESTIÓN DE FOTO DE PERFIL PERSONAL
+// GESTIóN DE FOTO DE PERFIL PERSONAL
 // =========================================================
 
 function cambiarFotoPerfil(event) {
@@ -348,7 +348,7 @@ function cambiarFotoPerfil(event) {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-        alert("Por favor selecciona un archivo de imagen válido (JPG, PNG, WebP).");
+        alert("Por favor selecciona un archivo de imagen vólido (JPG, PNG, WebP).");
         return;
     }
 
@@ -380,7 +380,7 @@ function cambiarFotoPerfil(event) {
         }
 
         actualizarUIConUsuario(currentUser);
-        mostrarAlertaToast("¡Tu foto de perfil se actualizó correctamente! 📸", "success");
+        mostrarAlertaToast("¡Tu foto de perfil se actualizó correctamente! ✅", "success");
     };
     reader.readAsDataURL(file);
 }
@@ -469,7 +469,7 @@ function actualizarContadores() {
     const subtituloEl = document.getElementById("subtituloPrincipal");
     if (subtituloEl) {
         subtituloEl.textContent = totalAlimentos === 0
-            ? "Tu despensa está lista para registrar alimentos."
+            ? "Tu despensa estó lista para registrar alimentos."
             : `Tienes ${totalAlimentos} alimento${totalAlimentos === 1 ? '' : 's'} en tu despensa personal.`;
     }
 }
@@ -492,7 +492,7 @@ function renderizarResumenDashboard() {
         textoImpactoEl.textContent = `Has evitado que ${usuarioStats.desperdicioEvitadoKg} kg de alimentos se desperdicien esta semana.`;
     }
 
-    // Gráfico semanal dinámico
+    // Grófico semanal dinómico
     renderizarGraficoSemanal();
 }
 
@@ -538,7 +538,7 @@ function obtenerBadgeClase(dias) {
     return "badge-green";
 }
 
-// Renderiza lista rápida de próximos a vencer en el Dashboard
+// Renderiza lista rópida de próximos a vencer en el Dashboard
 function renderizarExpiringInicio() {
     const contenedor = document.getElementById("listaExpiringInicio");
     if (!contenedor) return;
@@ -547,7 +547,7 @@ function renderizarExpiringInicio() {
         contenedor.innerHTML = `
             <div class="text-center py-4 text-muted small">
                 <i class="bi bi-shield-check fs-2 text-success d-block mb-1"></i>
-                No tienes alimentos próximos a vencer. ¡Tu despensa está fresca!
+                No tienes alimentos próximos a vencer. óTu despensa estó fresca!
             </div>
         `;
         return;
@@ -562,7 +562,7 @@ function renderizarExpiringInicio() {
             </div>
             <div class="expiring-item-content">
                 <strong>${item.nombre} ${item.esEjemplo ? '<span class="badge-ejemplo">Ejemplo</span>' : ''}</strong>
-                <span>${formatearFechaTexto(item.fechaVencimiento)} · ${item.cantidad}</span>
+                <span>${formatearFechaTexto(item.fechaVencimiento)} ó ${item.cantidad}</span>
             </div>
             <span class="expiry-badge ${obtenerBadgeClase(item.diasRestantes)}">
                 ${item.diasRestantes} días
@@ -583,7 +583,7 @@ function renderizarAlimentos(categoriaFiltro = 'Todas') {
     if (filtrados.length === 0) {
         contenedor.innerHTML = `
             <div class="col-12 text-center py-5">
-                <div class="fs-1 mb-2">🌱</div>
+                <div class="fs-1 mb-2">🥗</div>
                 <h5 class="fw-bold">No hay alimentos en esta categoría</h5>
                 <p class="text-muted small">Agrega tus productos de la compra con el botón "+ Agregar alimento".</p>
                 <button class="btn btn-sm btn-eco-primary" onclick="abrirModalAgregar()">
@@ -602,7 +602,7 @@ function renderizarAlimentos(categoriaFiltro = 'Todas') {
             </div>
             <div class="food-card-body">
                 <h3 class="food-card-title">${item.nombre}</h3>
-                <p class="food-card-meta">${item.categoria} · ${item.cantidad}</p>
+                <p class="food-card-meta">${item.categoria} ó ${item.cantidad}</p>
                 <div class="food-card-footer mt-auto">
                     <span class="expiry-badge ${obtenerBadgeClase(item.diasRestantes)}">
                         ${item.diasRestantes} días
@@ -624,9 +624,9 @@ function renderizarVencer() {
     if (alimentos.length === 0) {
         contenedor.innerHTML = `
             <div class="col-12 text-center py-5">
-                <div class="fs-1 mb-2">✨</div>
+                <div class="fs-1 mb-2">?</div>
                 <h5 class="fw-bold">No tienes alimentos en riesgo de vencer</h5>
-                <p class="text-muted small">¡Excelente control de tu despensa!</p>
+                <p class="text-muted small">óExcelente control de tu despensa!</p>
             </div>
         `;
         return;
@@ -642,7 +642,7 @@ function renderizarVencer() {
             </div>
             <div class="food-card-body">
                 <h3 class="food-card-title">${item.nombre}</h3>
-                <p class="food-card-meta">${item.categoria} · Vence: ${formatearFechaTexto(item.fechaVencimiento)}</p>
+                <p class="food-card-meta">${item.categoria} ó Vence: ${formatearFechaTexto(item.fechaVencimiento)}</p>
                 <div class="food-card-footer mt-auto">
                     <span class="expiry-badge ${obtenerBadgeClase(item.diasRestantes)}">
                         ${item.diasRestantes} días
@@ -679,10 +679,10 @@ function renderizarRecetasInicio() {
             <div class="recipe-card" onclick="verRecetaModal(${r.id})">
                 <div class="recipe-card-media">
                     ${r.foto ? `<img src="${r.foto}" alt="${r.titulo}">` : `<span>${r.emoji}</span>`}
-                    <span class="recipe-badge-time">⏱ ${r.tiempo}</span>
+                    <span class="recipe-badge-time">? ${r.tiempo}</span>
                 </div>
                 <div class="recipe-card-info">
-                    ${coincide ? `<div class="recipe-match-badge"><i class="bi bi-stars"></i> ¡Tienes ingredientes en tu despensa!</div>` : ''}
+                    ${coincide ? `<div class="recipe-match-badge"><i class="bi bi-stars"></i> óTienes ingredientes en tu despensa!</div>` : ''}
                     <h4>${r.titulo}</h4>
                     <p>${r.subtitulo}</p>
                 </div>
@@ -704,10 +704,10 @@ function renderizarRecetasCompletas(categoria = 'Todas') {
             <div class="recipe-card" onclick="verRecetaModal(${r.id})">
                 <div class="recipe-card-media">
                     ${r.foto ? `<img src="${r.foto}" alt="${r.titulo}">` : `<span>${r.emoji}</span>`}
-                    <span class="recipe-badge-time">⏱ ${r.tiempo}</span>
+                    <span class="recipe-badge-time">? ${r.tiempo}</span>
                 </div>
                 <div class="recipe-card-info">
-                    ${coincide ? `<div class="recipe-match-badge"><i class="bi bi-stars"></i> ¡Tienes ingredientes en tu despensa!</div>` : ''}
+                    ${coincide ? `<div class="recipe-match-badge"><i class="bi bi-stars"></i> óTienes ingredientes en tu despensa!</div>` : ''}
                     <h4>${r.titulo}</h4>
                     <p>${r.subtitulo}</p>
                 </div>
@@ -738,7 +738,7 @@ function renderizarRecordatorios() {
     contenedor.innerHTML = recordatorios.map(rec => `
         <div class="d-flex align-items-center justify-content-between p-3 rounded-3 border bg-white shadow-sm">
             <div class="d-flex align-items-center gap-3">
-                <span class="fs-3">${rec.emoji || '⏰'}</span>
+                <span class="fs-3">${rec.emoji || '?'}</span>
                 <div>
                     <div class="d-flex align-items-center gap-2">
                         <strong class="d-block text-dark ${rec.completado ? 'text-decoration-line-through text-muted' : ''}">${rec.texto}</strong>
@@ -766,7 +766,7 @@ function toggleRecordatorio(id) {
         guardarRecordatoriosUsuario();
         renderizarRecordatorios();
         if (rec.completado) {
-            mostrarAlertaToast("¡Recordatorio completado con éxito! ✓", "success");
+            mostrarAlertaToast("¡Recordatorio completado con éxito! ?", "success");
         }
     }
 }
@@ -798,7 +798,7 @@ function guardarNuevoRecordatorio() {
 
     const texto = inputTexto ? inputTexto.value.trim() : "";
     const tiempo = inputTiempo ? inputTiempo.value.trim() : "";
-    const emoji = selectEmoji ? selectEmoji.value : "⏰";
+    const emoji = selectEmoji ? selectEmoji.value : "?";
 
     if (!texto) {
         alert("Por favor escribe el mensaje de tu recordatorio.");
@@ -928,7 +928,7 @@ function guardarNuevoAlimento() {
     if (modalInst) modalInst.hide();
 
     renderizarTodo();
-    mostrarAlertaToast(`¡"${nombre}" fue agregado a tu despensa! 🍏`, "success");
+    mostrarAlertaToast(`¡"${nombre}" fue agregado a tu despensa! ✅`, "success");
 }
 
 // =========================================================
@@ -994,13 +994,13 @@ function marcarAlimentoConsumido() {
     if (modalInst) modalInst.hide();
 
     renderizarTodo();
-    mostrarAlertaToast(`🎉 ¡Excelente! Has aprovechado "${itemConsumido.nombre}". Sumaste ${formatearDinero(valorAhorro)} a tu ahorro personal.`, "success");
+    mostrarAlertaToast(`✅ ¡Excelente! Has aprovechado "${itemConsumido.nombre}". Sumaste ${formatearDinero(valorAhorro)} a tu ahorro personal.`, "success");
 }
 
 function eliminarAlimentoActual() {
     if (!alimentoSeleccionado) return;
 
-    if (confirm(`¿Seguro que deseas eliminar "${alimentoSeleccionado.nombre}" de tu despensa?`)) {
+    if (confirm(`¡Seguro que deseas eliminar "${alimentoSeleccionado.nombre}" de tu despensa?`)) {
         const nombreEliminado = alimentoSeleccionado.nombre;
         alimentos = alimentos.filter(a => a.id !== alimentoSeleccionado.id);
         guardarAlimentosUsuario();
@@ -1024,10 +1024,10 @@ function verRecetaModal(id) {
 
     const coincide = tieneIngredientesParaReceta(receta);
     const mensajeCoincidencia = coincide 
-        ? "✨ ¡Genial! Tienes los ingredientes necesarios en tu despensa para cocinar este plato.\n\n" 
+        ? "? óGenial! Tienes los ingredientes necesarios en tu despensa para cocinar este plato.\n\n" 
         : "";
 
-    alert(`📖 ${receta.titulo} (${receta.tiempo})\n\n${mensajeCoincidencia}Ingredientes:\n• ${receta.ingredientes.join('\n• ')}\n\nPreparación:\n${receta.preparacion}`);
+    alert(`🍳 ${receta.titulo} (${receta.tiempo})\n\n${mensajeCoincidencia}Ingredientes:\nó ${receta.ingredientes.join('\nó ')}\n\nPreparación:\n${receta.preparacion}`);
 }
 
 // =========================================================
@@ -1059,7 +1059,7 @@ function mostrarAlertaToast(mensaje, tipo = "success") {
 }
 
 // =========================================================
-// MANEJADORES DE AUTENTICACIÓN FIREBASE
+// MANEJADORES DE AUTENTICACIóN FIREBASE
 // =========================================================
 
 function abrirModalAuth(tab = 'login') {
@@ -1152,7 +1152,7 @@ async function manejarLoginEmail(e) {
     const res = await loginConEmail(email, pass);
     if (res.success) {
         cerrarModalAuth();
-        mostrarAlertaToast(`¡Bienvenid@ de nuevo, ${res.user.displayName || 'Usuario'}! 🌱`, "success");
+        mostrarAlertaToast(`¡Bienvenid@ de nuevo, ${res.user.displayName || 'Usuario'}! 🌿`, "success");
     } else {
         mostrarAlertaAuth(res.error, "error");
     }
@@ -1287,7 +1287,7 @@ async function manejarModoInvitado() {
     const res = await loginInvitado();
     if (res.success) {
         cerrarModalAuth();
-        mostrarAlertaToast(`Has ingresado en Modo Invitado 🌱`, "info");
+        mostrarAlertaToast(`Has ingresado en Modo Invitado 👋`, "info");
     }
 }
 
@@ -1319,7 +1319,7 @@ function abrirMenuOPerfil() {
 }
 
 async function confirmarCerrarSesion() {
-    if (confirm("¿Deseas cerrar tu sesión actual en EcoFood?")) {
+    if (confirm("¡Deseas cerrar tu sesión actual en EcoFood?")) {
         await cerrarSesion();
         window.location.replace("login.html");
     }
@@ -1342,12 +1342,12 @@ function guardarConfiguracion() {
             guardarCuentaGoogle(currentUser);
         }
         actualizarUIConUsuario(currentUser);
-        mostrarAlertaToast("¡Preferencias personales guardadas! 💚", "success");
+        mostrarAlertaToast("¡Preferencias personales guardadas! ✅", "success");
     }
 }
 
 // =========================================================
-// UTILIDADES Y BÚSQUEDA
+// UTILIDADES Y BóSQUEDA
 // =========================================================
 
 function buscarEnApp(e) {
@@ -1374,7 +1374,7 @@ function buscarEnApp(e) {
                     </div>
                     <div class="food-card-body">
                         <h3 class="food-card-title">${item.nombre}</h3>
-                        <p class="food-card-meta">${item.categoria} · ${item.cantidad}</p>
+                        <p class="food-card-meta">${item.categoria} ó ${item.cantidad}</p>
                         <div class="food-card-footer mt-auto">
                             <span class="expiry-badge ${obtenerBadgeClase(item.diasRestantes)}">
                                 ${item.diasRestantes} días

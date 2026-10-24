@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@
     <script>
         (function() {
             try {
-                var session = localStorage.getItem("ecofood_user_session");
+                var session = sessionStorage.getItem("ecofood_user_session");
                 if (!session || !JSON.parse(session)) {
                     window.location.replace("login.html");
                 }
@@ -176,54 +176,54 @@
                 </button>
             </div>
 
-            <!-- GUÃA DE BIENVENIDA Y ONBOARDING PARA USUARIOS NUEVOS -->
+            <!-- GUÍA DE BIENVENIDA Y ONBOARDING PARA USUARIOS NUEVOS -->
             <div id="bannerBienvenidaUsuario" class="eco-welcome-banner mb-4" style="display: none;">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <div class="d-flex align-items-center gap-2">
-                        <span class="welcome-badge-icon">âœ¨</span>
+                        <span class="welcome-badge-icon">✨</span>
                         <h4 class="fw-bold m-0" id="welcomeGuideTitle" style="color: var(--primary-dark); font-size: 18px;">
-                            Â¡Te damos la bienvenida a tu despensa inteligente!
+                            ¡Te damos la bienvenida a tu despensa inteligente!
                         </h4>
                     </div>
                     <button type="button" class="btn-close" onclick="cerrarGuiaBienvenida()" aria-label="Cerrar"></button>
                 </div>
                 <p class="text-muted small mb-3">
-                    Hemos preparado ejemplos interactivos en cada funciÃ³n para que aprendas a usar EcoFood en menos de un minuto:
+                    Hemos preparado ejemplos interactivos en cada función para que aprendas a usar EcoFood en menos de un minuto:
                 </p>
                 <div class="welcome-steps-grid">
                     <div class="welcome-step-card" onclick="mostrar('alimentos')">
                         <div class="step-num">1</div>
-                        <div class="step-icon">ðŸŽ</div>
+                        <div class="step-icon">🍎</div>
                         <h6>Mis Alimentos</h6>
                         <p>Agrega lo que compraste con foto, cantidad y fecha. Tienes 3 alimentos de ejemplo listos.</p>
                         <span class="step-action-link">Explorar despensa <i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="welcome-step-card" onclick="mostrar('vencer')">
                         <div class="step-num">2</div>
-                        <div class="step-icon">ðŸš¦</div>
-                        <h6>SemÃ¡foro de Vencimiento</h6>
-                        <p>ðŸ”´ Urgente (1-2 dÃ­as), ðŸŸ  Pronto (3-5 dÃ­as) y ðŸŸ¢ Seguro (>5 dÃ­as). Te avisa quÃ© comer primero.</p>
-                        <span class="step-action-link">Ver semÃ¡foro <i class="bi bi-arrow-right"></i></span>
+                        <div class="step-icon">🚦</div>
+                        <h6>Semáforo de Vencimiento</h6>
+                        <p>🔴 Urgente (1-2 días), 🟠 Pronto (3-5 días) y 🟢 Seguro (>5 días). Te avisa qué comer primero.</p>
+                        <span class="step-action-link">Ver semáforo <i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="welcome-step-card" onclick="mostrar('recetas')">
                         <div class="step-num">3</div>
-                        <div class="step-icon">ðŸ³</div>
+                        <div class="step-icon">🍳</div>
                         <h6>Recetas Personalizadas</h6>
-                        <p>Platos automÃ¡ticos que usan exactamente los ingredientes que tienes en tu despensa personal.</p>
+                        <p>Platos automáticos que usan exactamente los ingredientes que tienes en tu despensa personal.</p>
                         <span class="step-action-link">Ver recetas <i class="bi bi-arrow-right"></i></span>
                     </div>
                     <div class="welcome-step-card" onclick="mostrar('estadisticas')">
                         <div class="step-num">4</div>
-                        <div class="step-icon">ðŸ’°</div>
+                        <div class="step-icon">💰</div>
                         <h6>Impacto y Ahorro Real</h6>
                         <p>Toca "Marcar como consumido" en un alimento y mira subir tu dinero ahorrado y kg de comida evitada.</p>
-                        <span class="step-action-link">Ver estadÃ­sticas <i class="bi bi-arrow-right"></i></span>
+                        <span class="step-action-link">Ver estadísticas <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
                     <span class="small text-muted"><i class="bi bi-lightbulb-fill text-warning me-1"></i> Puedes tocar los alimentos de ejemplo para probar o borrarlos con 1 clic.</span>
                     <button class="btn btn-sm btn-eco-primary px-3 fw-bold" onclick="cerrarGuiaBienvenida()">
-                        <i class="bi bi-check2-circle"></i> Â¡Entendido, empezar a ahorrar!
+                        <i class="bi bi-check2-circle"></i> ¡Entendido, empezar a ahorrar!
                     </button>
                 </div>
             </div>
@@ -388,7 +388,7 @@
             
             <div class="section-header">
                 <div class="section-greeting">
-                    <h1>Próximos a vencer ⏰</h1>
+                    <h1>Próximos a vencer ?</h1>
                     <p>Revisa estos alimentos antes de que se desperdicien.</p>
                 </div>
             </div>
@@ -441,7 +441,7 @@
             <div class="alert alert-success border-0 rounded-4 p-3 mb-3 d-flex align-items-center gap-3" style="background:#EBF9EE; color:#1E6931;">
                 <i class="bi bi-magic fs-4"></i>
                 <div class="small">
-                    <strong>Recetas inteligentes:</strong> Las recetas con la etiqueta <span class="badge bg-success">âœ¨ Â¡Tienes ingredientes!</span> coinciden con los alimentos guardados en tu despensa personal.
+                    <strong>Recetas inteligentes:</strong> Las recetas con la etiqueta <span class="badge bg-success">✨ ¡Tienes ingredientes!</span> coinciden con los alimentos guardados en tu despensa personal.
                 </div>
             </div>
 
@@ -466,7 +466,7 @@
         <section id="recordatorios" class="app-view">
             <div class="section-header">
                 <div class="section-greeting">
-                    <h1>Recordatorios ðŸ””</h1>
+                    <h1>Recordatorios 🔔</h1>
                     <p>Avisos autom&aacute;ticos para que nunca olvides consumir tus alimentos a tiempo.</p>
                 </div>
                 <button class="btn-eco-primary" onclick="abrirModalRecordatorio()">
@@ -478,10 +478,10 @@
             <div class="alert alert-info border-0 rounded-4 p-3 mb-3 d-flex align-items-center gap-3" style="background:#E0F2FE; color:#0369A1;">
                 <i class="bi bi-info-circle-fill fs-4"></i>
                 <div class="small">
-                    <strong>&iquest;C&oacute;mo usar los recordatorios?</strong> Toca el c&iacute;rculo con check (âœ“) para tachar una tarea completada. Puedes agregar avisos para tus compras o comidas.
+                    <strong>&iquest;C&oacute;mo usar los recordatorios?</strong> Toca el c&iacute;rculo con check (✓) para tachar una tarea completada. Puedes agregar avisos para tus compras o comidas.
                 </div>
             </div>
-            </div>
+            
 
             <div class="eco-panel">
                 <div id="listaRecordatorios" class="d-flex flex-column gap-3">
@@ -535,9 +535,9 @@
 
                 <div class="resumen-card card-green">
                     <div class="resumen-card-info">
-                        <p>DÃ­as de racha eco</p>
-                        <h2 id="statRachaDias">1 dÃ­a</h2>
-                        <small>Â¡Sigue asÃ­!</small>
+                        <p>Días de racha eco</p>
+                        <h2 id="statRachaDias">1 día</h2>
+                        <small>¡Sigue así!</small>
                     </div>
                     <div class="resumen-card-icon"><i class="bi bi-fire"></i></div>
                 </div>
@@ -627,7 +627,7 @@
             <div class="section-header">
                 <div class="section-greeting">
                     <h1>Perfil y Cuenta ⚙️</h1>
-                    <p>Gestiona tu sesión de Firebase y tus preferencias personales.</p>
+                    <p>Gestiona tu cuenta y tus preferencias personales.</p>
                 </div>
             </div>
 
@@ -710,11 +710,11 @@
 
             </div>
 
-            <!-- INFORMACIÓN DE FIREBASE -->
+            <!-- ESTADO DE CONEXIÓN -->
             <div class="eco-panel">
-                <h5 class="fw-bold mb-2"><i class="bi bi-fire text-danger"></i> Conexión con Firebase</h5>
+                <h5 class="fw-bold mb-2"><i class="bi bi-shield-check text-success"></i> Estado de la cuenta</h5>
                 <p class="text-muted small mb-3">
-                    Esta aplicación cuenta con integración lista para Firebase Authentication. Puedes conectar tus propias credenciales en <code>firebase-config.js</code> o utilizar el modo demo interactivo.
+                    EcoFood protege tu sesión de forma segura. Tus datos se guardan en tu dispositivo y se sincronizan cuando inicias sesión.
                 </p>
                 <div class="bg-light p-3 rounded-3 font-monospace small">
                     Estado: <span class="text-success fw-bold">✓ Sistema de autenticación listo</span>
@@ -755,12 +755,12 @@
                     <div class="accordion-item border-bottom">
                         <h2 class="accordion-header">
                             <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                ¿Cómo funciona el inicio de sesión con Firebase?
+                                ¿Cómo funciona el inicio de sesión?
                             </button>
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                EcoFood utiliza Firebase Authentication para gestionar usuarios con Correo y Contraseña, Google o modo invitado. Los datos de sesión persisten automáticamente en tu navegador.
+                                EcoFood gestiona tu cuenta de forma segura. Puedes iniciar sesión con tu correo y contraseña, con Google, o entrar en Modo Invitado para explorar sin crear cuenta. Los datos de sesión persisten automáticamente en tu navegador.
                             </div>
                         </div>
                     </div>
@@ -803,7 +803,7 @@
         <span>Alimentos</span>
     </button>
 
-    <!-- Botón flotante central (+) -->
+    <!-- Botán flotante central (+) -->
     <button class="bottom-nav-fab" onclick="abrirModalAgregar()" title="Agregar alimento">
         <i class="bi bi-plus-lg"></i>
     </button>
@@ -912,7 +912,7 @@
 
             <div class="modal-body eco-modal-body food-detail-view-card">
                 
-                <!-- FOTO HERO CON BOTÓN DE CÁMARA -->
+                <!-- FOTO HERO CON BOTÓN DE CáMARA -->
                 <div class="detail-hero-media" id="detalleHeroMedia">
                     <span id="detalleEmojiGrande">🍓</span>
                 </div>
@@ -962,7 +962,7 @@
 
 
 <!-- =========================================================
-     MODAL: AUTENTICACIÓN FIREBASE (LOGIN / REGISTRO / RECUPERAR)
+     MODAL: AUTÉNTICACIÓN FIREBASE (LOGIN / REGISTRO / RECUPERAR)
      ========================================================= -->
 <div class="modal fade" id="modalAuth" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -973,7 +973,7 @@
                     <div class="logo-leaf-icon" style="width:32px;height:32px;font-size:16px;">
                         <i class="bi bi-tree-fill"></i>
                     </div>
-                    <h5 class="modal-title eco-modal-title">EcoFood Auth</h5>
+                    <h5 class="modal-title eco-modal-title">EcoFood</h5>
                 </div>
                 <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -1008,7 +1008,7 @@
                     <span>o con tu correo</span>
                 </div>
 
-                <!-- FORMULARIO: INICIAR SESIÓN -->
+                <!-- FORMULARIO: INICIAR SESIáN -->
                 <form id="formLogin" onsubmit="manejarLoginEmail(event)">
                     <div class="eco-form-group">
                         <label>Correo electrónico</label>
@@ -1018,7 +1018,7 @@
                     <div class="eco-form-group">
                         <label>Contraseña</label>
                         <div class="position-relative">
-                            <input type="password" id="loginPassword" class="eco-form-control" placeholder="••••••••" required>
+                            <input type="password" id="loginPassword" class="eco-form-control" placeholder="áááááááá" required>
                             <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3 text-muted" style="cursor:pointer;" onclick="togglePasswordVis('loginPassword', this)"></i>
                         </div>
                     </div>
@@ -1049,9 +1049,9 @@
                     </div>
 
                     <div class="eco-form-group">
-                        <label>Contraseña (mínimo 6 caracteres)</label>
+                        <label>Contraseña (mánimo 6 caracteres)</label>
                         <div class="position-relative">
-                            <input type="password" id="regPassword" class="eco-form-control" placeholder="••••••••" required minlength="6">
+                            <input type="password" id="regPassword" class="eco-form-control" placeholder="áááááááá" required minlength="6">
                             <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3 text-muted" style="cursor:pointer;" onclick="togglePasswordVis('regPassword', this)"></i>
                         </div>
                     </div>
@@ -1161,7 +1161,7 @@
 <!-- Configuración de Firebase -->
 <script src="firebase-config.js"></script>
 
-<!-- Lógica de la aplicación EcoFood -->
+<!-- Lágica de la aplicacián EcoFood -->
 <script src="script.js"></script>
 
 <!-- EcoBot Chatbot con IA Gemini -->
@@ -1192,13 +1192,13 @@
                 <div class="eco-form-group mb-4">
                     <label>Ícono</label>
                     <select id="nuevoRecordatorioEmoji" class="eco-form-control">
-                        <option value="⏰">⏰ Recordatorio general</option>
-                        <option value="🥛">🥛 Lácteos</option>
-                        <option value="🍓">🍓 Frutas</option>
-                        <option value="🥬">🥬 Verduras</option>
-                        <option value="🍗">🍗 Carnes</option>
-                        <option value="🥘">🥘 Cocina / Receta</option>
-                        <option value="🛒">🛒 Mercado</option>
+                        <option value="?">? Recordatorio general</option>
+                        <option value="Lácteos">🥛 Lácteos</option>
+                        <option value="Frutas">🍎 Frutas</option>
+                        <option value="Verduras">🥬 Verduras</option>
+                        <option value="Carnes">🍗 Carnes</option>
+                        <option value="Cocina">🍳 Cocina / Receta</option>
+                        <option value="Mercado">🛒 Mercado</option>
                     </select>
                 </div>
                 <button class="btn-eco-primary w-100 justify-content-center py-2" onclick="guardarNuevoRecordatorio()">
@@ -1238,7 +1238,7 @@
                         </div>
                         <div class="email-preview-row">
                             <strong>Asunto:</strong>
-                            <span class="fw-bold text-dark">ðŸ”‘ Restablece tu contraseÃ±a de EcoFood</span>
+                            <span class="fw-bold text-dark">🔑 Restablece tu contraseña de EcoFood</span>
                         </div>
                     </div>
 
@@ -1248,35 +1248,35 @@
                             <div class="email-header-brand">
                                 <img src="img/logo.png" alt="EcoFood Logo">
                                 <h3>EcoFood</h3>
-                                <p>Menos desperdicio, mÃ¡s ahorro para tu hogar</p>
+                                <p>Menos desperdicio, más ahorro para tu hogar</p>
                             </div>
 
                             <!-- CONTENIDO DEL MENSAJE -->
                             <div class="email-main-message">
-                                <h5 class="fw-bold mb-3" style="color: #1E293B;">Â¡Hola! ðŸ‘‹ðŸŒ¿</h5>
+                                <h5 class="fw-bold mb-3" style="color: #1E293B;">¡Hola! 👋🌿</h5>
                                 <p>
-                                    Recibimos una solicitud para restablecer la contraseÃ±a de tu cuenta personal en <b>EcoFood</b>.
+                                    Recibimos una solicitud para restablecer la contraseña de tu cuenta personal en <b>EcoFood</b>.
                                 </p>
                                 <p>
-                                    Para elegir una nueva contraseÃ±a y volver a acceder a tu despensa inteligente, haz clic en el siguiente botÃ³n seguro:
+                                    Para elegir una nueva contraseña y volver a acceder a tu despensa inteligente, haz clic en el siguiente botón seguro:
                                 </p>
 
                                 <div class="text-center my-4">
                                     <a href="javascript:void(0)" class="btn-email-action">
-                                        <i class="bi bi-shield-lock me-1"></i> Restablecer mi contraseÃ±a
+                                        <i class="bi bi-shield-lock me-1"></i> Restablecer mi contraseña
                                     </a>
                                 </div>
 
                                 <div class="email-security-box">
-                                    <div class="fw-bold mb-1 text-dark"><i class="bi bi-shield-check text-success"></i> InformaciÃ³n de seguridad:</div>
-                                    <div>Este enlace expira en 60 minutos. Si tÃº no solicitaste este cambio, no te preocupes: puedes ignorar este correo y tu cuenta continuarÃ¡ totalmente protegida.</div>
+                                    <div class="fw-bold mb-1 text-dark"><i class="bi bi-shield-check text-success"></i> Información de seguridad:</div>
+                                    <div>Este enlace expira en 60 minutos. Si tú no solicitaste este cambio, no te preocupes: puedes ignorar este correo y tu cuenta continuará totalmente protegida.</div>
                                 </div>
                             </div>
 
-                            <!-- PIE DE PÃGINA -->
+                            <!-- PIE DE PÁGINA -->
                             <div class="email-footer-legal">
-                                <div class="mb-1"><strong>EcoFood Technologies Â© 2026</strong></div>
-                                <div>Cuidando tu economÃ­a familiar y reduciendo el desperdicio en el planeta ðŸŒŽ</div>
+                                <div class="mb-1"><strong>EcoFood Technologies © 2026</strong></div>
+                                <div>Cuidando tu economía familiar y reduciendo el desperdicio en el planeta 🌎</div>
                             </div>
                         </div>
                     </div>
