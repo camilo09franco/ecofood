@@ -24,6 +24,10 @@
     <script>
         (function() {
             try {
+                // Si venimos de un redirect de Google, no interrumpir — Firebase necesita procesar el resultado
+                var googleRedirectPending = localStorage.getItem("ecofood_google_redirect_pending");
+                if (googleRedirectPending) return;
+
                 var session = sessionStorage.getItem("ecofood_user_session");
                 if (session && JSON.parse(session)) {
                     window.location.replace("index.html");

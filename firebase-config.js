@@ -231,35 +231,30 @@ async function registrarConEmail(nombre, email, password) {
 }
 
 /**
- * Iniciar sesión con Google
- * Usa signInWithRedirect en lugar de signInWithPopup para evitar
- * errores de Cross-Origin-Opener-Policy (COOP) en navegadores modernos.
+ * Iniciar sesión con Google — usa Popup con fallback al modal personalizado
  */
 async function loginConGoogle() {
     if (isFirebaseReady && auth && googleProvider) {
+        localStorage.removeItem("ecofood_google_redirect_pending");
         try {
-            // Primero verificar si venimos de un redirect previo
-            const result = await auth.getRedirectResult();
-            if (result && result.user) {
-                currentUser = result.user;
-                currentUser.isGoogle = true;
-                guardarSesionLocal(currentUser);
-                actualizarUIConUsuario(currentUser);
-                return { success: true, user: currentUser };
-            }
-            // Si no hay resultado de redirect, iniciar el redirect hacia Google
-            await auth.signInWithRedirect(googleProvider);
-            return { success: false, redirecting: true };
+            const result = await auth.signInWithPopup(googleProvider);
+            currentUser = result.user;
+            currentUser.isGoogle = true;
+            guardarSesionLocal(currentUser);
+            actualizarUIConUsuario(currentUser);
+            return { success: true, user: currentUser };
         } catch (error) {
-            console.warn("Firebase Google:", error);
-            if (error.code === "auth/unauthorized-domain" || error.code === "auth/operation-not-allowed") {
+            console.warn("Firebase Google login:", error.code);
+            if (error.code === "auth/popup-closed-by-user" ||
+                error.code === "auth/cancelled-popup-request") {
+                return { success: false, error: null };
+            }
+            if (error.code === "auth/unauthorized-domain" ||
+                error.code === "auth/operation-not-allowed" ||
+                error.code === "auth/popup-blocked") {
                 if (typeof cerrarModalAuth === "function") cerrarModalAuth();
                 if (typeof abrirModalGoogleLogin === "function") abrirModalGoogleLogin();
                 return { success: false, isCustomGoogle: true };
-            }
-            if (error.code === "auth/popup-closed-by-user") {
-                // Usuario canceló — no mostrar error
-                return { success: false, error: null };
             }
             return { success: false, error: traducirErrorFirebase(error.code) };
         }
@@ -339,6 +334,8 @@ function inicializarAuthListener() {
     if (isFirebaseReady && auth) {
         // Capturar resultado del redirect de Google si existe
         auth.getRedirectResult().then((result) => {
+            // Limpiar el flag de redirect pendiente
+            localStorage.removeItem("ecofood_google_redirect_pending");
             if (result && result.user) {
                 currentUser = result.user;
                 currentUser.isGoogle = true;
@@ -349,6 +346,8 @@ function inicializarAuthListener() {
                 }
             }
         }).catch((error) => {
+            // Limpiar el flag también si hay error para no dejar al usuario bloqueado
+            localStorage.removeItem("ecofood_google_redirect_pending");
             // Solo loguear errores reales, ignorar cancelaciones
             if (error.code !== "auth/popup-closed-by-user" && error.code !== "auth/cancelled-popup-request") {
                 console.warn("Error en redirect de Google:", error.code);
