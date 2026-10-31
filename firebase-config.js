@@ -42,9 +42,9 @@ try {
             // Siempre mostrar el selector de cuenta, aunque ya haya una sesión activa
             googleProvider.setCustomParameters({ prompt: 'select_account' });
             isFirebaseReady = true;
-            console.log("🌲 Firebase Auth inicializado con éxito.");
+            console.log("Firebase Auth inicializado con éxito.");
         } else {
-            console.warn("🌱 Firebase: Usando modo de demostración local (configura tus claves en firebase-config.js cuando desees).");
+            console.warn("Firebase: Usando modo de demostración local (configura tus claves en firebase-config.js cuando desees).");
         }
     }
 } catch (error) {
