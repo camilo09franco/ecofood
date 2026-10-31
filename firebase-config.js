@@ -232,31 +232,41 @@ async function registrarConEmail(nombre, email, password) {
 
 /**
  * Iniciar sesión con Google
+ * Usa signInWithRedirect en lugar de signInWithPopup para evitar
+ * errores de Cross-Origin-Opener-Policy (COOP) en navegadores modernos.
  */
 async function loginConGoogle() {
     if (isFirebaseReady && auth && googleProvider) {
         try {
-            const result = await auth.signInWithPopup(googleProvider);
-            currentUser = result.user;
-            currentUser.isGoogle = true;
-            guardarSesionLocal(currentUser);
-            actualizarUIConUsuario(currentUser);
-            return { success: true, user: currentUser };
+            // Primero verificar si venimos de un redirect previo
+            const result = await auth.getRedirectResult();
+            if (result && result.user) {
+                currentUser = result.user;
+                currentUser.isGoogle = true;
+                guardarSesionLocal(currentUser);
+                actualizarUIConUsuario(currentUser);
+                return { success: true, user: currentUser };
+            }
+            // Si no hay resultado de redirect, iniciar el redirect hacia Google
+            await auth.signInWithRedirect(googleProvider);
+            return { success: false, redirecting: true };
         } catch (error) {
-            console.warn("Firebase Google Popup:", error);
+            console.warn("Firebase Google:", error);
             if (error.code === "auth/unauthorized-domain" || error.code === "auth/operation-not-allowed") {
-                cerrarModalAuth();
-                abrirModalGoogleLogin();
-                mostrarAlertaToast("Aviso: Agrega '127.0.0.1' en Firebase Console > Auth > Configuración. Puedes ingresar con el selector aquí:");
+                if (typeof cerrarModalAuth === "function") cerrarModalAuth();
+                if (typeof abrirModalGoogleLogin === "function") abrirModalGoogleLogin();
                 return { success: false, isCustomGoogle: true };
+            }
+            if (error.code === "auth/popup-closed-by-user") {
+                // Usuario canceló — no mostrar error
+                return { success: false, error: null };
             }
             return { success: false, error: traducirErrorFirebase(error.code) };
         }
     } else {
-        // En modo local sin Firebase conectado:
-        // Abre el selector de cuenta de Google personalizable
-        cerrarModalAuth();
-        abrirModalGoogleLogin();
+        // Sin Firebase conectado: abre el selector de cuenta personalizable
+        if (typeof cerrarModalAuth === "function") cerrarModalAuth();
+        if (typeof abrirModalGoogleLogin === "function") abrirModalGoogleLogin();
         return { success: false, isCustomGoogle: true };
     }
 }
@@ -318,6 +328,7 @@ async function cerrarSesion() {
 
 /**
  * Listener global del estado de autenticación
+ * También captura el resultado del signInWithRedirect de Google.
  */
 function inicializarAuthListener() {
     const esPaginaLogin = window.location.pathname.toLowerCase().includes("login.html");
@@ -326,6 +337,24 @@ function inicializarAuthListener() {
                              (!window.location.pathname.includes(".html"));
 
     if (isFirebaseReady && auth) {
+        // Capturar resultado del redirect de Google si existe
+        auth.getRedirectResult().then((result) => {
+            if (result && result.user) {
+                currentUser = result.user;
+                currentUser.isGoogle = true;
+                guardarSesionLocal(currentUser);
+                actualizarUIConUsuario(currentUser);
+                if (esPaginaLogin) {
+                    window.location.replace("index.html");
+                }
+            }
+        }).catch((error) => {
+            // Solo loguear errores reales, ignorar cancelaciones
+            if (error.code !== "auth/popup-closed-by-user" && error.code !== "auth/cancelled-popup-request") {
+                console.warn("Error en redirect de Google:", error.code);
+            }
+        });
+
         auth.onAuthStateChanged((user) => {
             if (user) {
                 currentUser = user;
@@ -408,7 +437,7 @@ function actualizarUIConUsuario(user) {
         const inicial = nombre.charAt(0).toUpperCase();
 
         if (nombreElemento) nombreElemento.textContent = `Hola, ${nombre}`;
-        if (saludoElemento) saludoElemento.innerHTML = `¡Hola, ${nombre}! 🌿`;
+        if (saludoElemento) saludoElemento.innerHTML = `¡Hola, ${nombre}!`;
         if (nombrePerfil) nombrePerfil.textContent = nombre;
         if (emailElemento) emailElemento.textContent = user.email || "";
         if (inputNombreConfig) inputNombreConfig.value = nombre;
@@ -444,7 +473,7 @@ function actualizarUIConUsuario(user) {
         }
     } else {
         if (nombreElemento) nombreElemento.textContent = "Iniciar sesión";
-        if (saludoElemento) saludoElemento.innerHTML = "¡Bienvenid@ a EcoFood! 🌿";
+        if (saludoElemento) saludoElemento.innerHTML = "¡Bienvenid@ a EcoFood!";
         if (nombrePerfil) nombrePerfil.textContent = "Sin sesión activa";
         if (emailElemento) emailElemento.textContent = "Inicia sesión para sincronizar tus alimentos";
         if (inputNombreConfig) inputNombreConfig.value = "";

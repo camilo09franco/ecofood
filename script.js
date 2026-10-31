@@ -464,7 +464,7 @@ function actualizarContadores() {
     }
     const saludoEl = document.getElementById("saludoPrincipal");
     if (saludoEl) {
-        saludoEl.innerHTML = `¡Hola, ${nombre}! 🌿`;
+        saludoEl.innerHTML = `¡Hola, ${nombre}!`;
     }
     const subtituloEl = document.getElementById("subtituloPrincipal");
     if (subtituloEl) {

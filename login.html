@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - EcoFood</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
 
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,7 +51,7 @@
         </div>
 
         <div class="mb-3">
-            <h1 class="fw-bold" id="authTitle" style="font-size: 24px; color: var(--text-main);">Bienvenid@ 👋</h1>
+            <h1 class="fw-bold" id="authTitle" style="font-size: 24px; color: var(--text-main);">Bienvenid@</h1>
             <p class="text-muted small" id="authSubtitle">Inicia sesión o regístrate para acceder a tu despensa y gestionar tus alimentos.</p>
         </div>
 
@@ -307,7 +308,7 @@
             formLogin.style.display = "block";
             formRegister.style.display = "none";
             formRecover.style.display = "none";
-            title.textContent = "Bienvenid@ 👋";
+            title.textContent = "Bienvenid@";
             subtitle.textContent = "Inicia sesión para acceder a tu despensa y gestionar tus alimentos.";
         } else if (tab === 'register') {
             tabLogin.classList.remove("active");
@@ -315,7 +316,7 @@
             formLogin.style.display = "none";
             formRegister.style.display = "block";
             formRecover.style.display = "none";
-            title.textContent = "Crea tu Cuenta 🌱";
+            title.textContent = "Crea tu Cuenta";
             subtitle.textContent = "ónete a EcoFood y empieza a ahorrar dinero evitando el desperdicio.";
         }
     }
@@ -327,7 +328,7 @@
         document.getElementById("formLogin").style.display = "none";
         document.getElementById("formRegister").style.display = "none";
         document.getElementById("formRecover").style.display = "block";
-        document.getElementById("authTitle").textContent = "Recuperar Contraseña 🔑";
+        document.getElementById("authTitle").textContent = "Recuperar Contraseña";
         document.getElementById("authSubtitle").textContent = "Te ayudamos a volver a tu cuenta en segundos.";
     }
 
@@ -551,7 +552,7 @@
             if (emailSpan) emailSpan.textContent = email;
             if (previewEmailSpan) previewEmailSpan.textContent = email;
             if (successCard) successCard.style.display = "block";
-            document.getElementById("authTitle").textContent = "¡Correo Enviado! 📬";
+            document.getElementById("authTitle").textContent = "Correo Enviado";
             document.getElementById("authSubtitle").textContent = "Revisa tu bandeja de entrada para continuar.";
         } else {
             mostrarAlerta(res.error || "Ocurrió un error al enviar el correo.", "error");
@@ -617,7 +618,7 @@
 
                             <!-- CONTENIDO DEL MENSAJE -->
                             <div class="email-main-message">
-                                <h5 class="fw-bold mb-3" style="color: #1E293B;">¡Hola! 👋🌿</h5>
+                                <h5 class="fw-bold mb-3" style="color: #1E293B;">¡Hola!</h5>
                                 <p>
                                     Recibimos una solicitud para restablecer la contraseña de tu cuenta personal en <b>EcoFood</b>.
                                 </p>
